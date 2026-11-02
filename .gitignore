@@ -156,3 +156,14 @@ config.json
 /docs/superpowers/
 /docs/agent/
 /docs/portable/
+
+# WorkBuddy / CodeBuddy scratch: dumped markup, logs, notes. Never shipped.
+.workbuddy/
+
+# Design references used while building the template presets. Third-party
+# screenshots, kept locally only. The rendered samples live in assets/pdf-templates/.
+/*-resume-examples.jpg
+/resume template *.jpg
+
+# Per-machine launcher (starts both servers and opens the dashboard)
+/start-resume-matcher.bat

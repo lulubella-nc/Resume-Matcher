@@ -184,6 +184,23 @@ Resume Matcher 是免费且开源的，依靠赞助商与支持者维持运转�
 | **鲜明单栏** | ![鲜明单栏](assets/pdf-templates/vivid-single.webp) | 彩色单栏布局，强调色标题与箭头项目符号。[查看 PDF](assets/pdf-templates/vivid-single.pdf) |
 | **Modern Deedy** | ![Modern Deedy](assets/pdf-templates/modern-deedy.webp) | Lato 字体的单页紧凑版式，栏目标题为浅灰色大写。[查看 PDF](assets/pdf-templates/modern-deedy.pdf) |
 | **Deedy** | ![Deedy](assets/pdf-templates/deedy.webp) | 双栏布局，细体姓名、窄左栏与浅灰色标题。[查看 PDF](assets/pdf-templates/deedy.pdf) |
+| **侧栏照片** | ![侧栏照片](assets/pdf-templates/photo-sidebar.webp) | 左侧彩色栏放照片、联系方式与技能，右侧讲述你的经历。[查看 PDF](assets/pdf-templates/photo-sidebar.pdf) |
+| **雅致** | ![雅致](assets/pdf-templates/editorial.webp) | 金色衬线标题、圆形证件照与纯技能清单的宽松双栏版式。[查看 PDF](assets/pdf-templates/editorial.pdf) |
+| **边栏札记** | ![边栏札记](assets/pdf-templates/rail-notes.webp) | 右侧栏放带标签的联系方式、图标栏目头与细线技能。[查看 PDF](assets/pdf-templates/rail-notes.pdf) |
+| **标签块** | ![标签块](assets/pdf-templates/label-chips.webp) | 姓名后的彩色色带、黑色标签式栏目头与细线双列技能。[查看 PDF](assets/pdf-templates/label-chips.pdf) |
+| **经典细线** | ![经典细线](assets/pdf-templates/classic-rules.webp) | 居中抬头，栏目名加宽字距配细线，日期独立左栏。[查看 PDF](assets/pdf-templates/classic-rules.pdf) |
+| **编号** | ![编号](assets/pdf-templates/numbered.webp) | 栏目编号配粗线，联系方式为标签值网格。[查看 PDF](assets/pdf-templates/numbered.pdf) |
+| **夜色边栏** | ![夜色边栏](assets/pdf-templates/night-rail.webp) | 通栏深蓝侧栏配白色细线技能。[查看 PDF](assets/pdf-templates/night-rail.pdf) |
+| **色带侧栏** | ![色带侧栏](assets/pdf-templates/band-rail.webp) | 顶部彩色色带，窄左栏放技能与语言。[查看 PDF](assets/pdf-templates/band-rail.pdf) |
+| **时间轴** | ![时间轴](assets/pdf-templates/timeline.webp) | 照片居中压在姓名上方，栏目用带图标的大写标签，每条经历都挂在一个时间轴节点上。[查看 PDF](assets/pdf-templates/timeline.pdf) |
+| **分隔栏** | ![分隔栏](assets/pdf-templates/rule-rail.webp) | 超大姓名配职位说明，左栏以竖线分隔，技能下方带细线。[查看 PDF](assets/pdf-templates/rule-rail.pdf) |
+| **衬线分栏** | ![衬线分栏](assets/pdf-templates/serif-rail.webp) | 衬线体的强调色姓名紧挨方形照片，栏目为字距大写，右栏技能带分隔线。[查看 PDF](assets/pdf-templates/serif-rail.pdf) |
+| **蓝线分栏** | ![蓝线分栏](assets/pdf-templates/blue-rail.webp) | 照片与姓名并排，栏目为图标加粗标题，每项技能下有一条浅蓝细线。[查看 PDF](assets/pdf-templates/blue-rail.pdf) |
+| **深色横幅** | ![深色横幅](assets/pdf-templates/night-band.webp) | 深色横幅内居中放照片与衬线姓名，下方是联系方式条，正文单栏阅读。[查看 PDF](assets/pdf-templates/night-band.pdf) |
+| **方框抬头** | ![方框抬头](assets/pdf-templates/framed.webp) | 姓名与职位装进方框，栏目为全宽下划线的大写标题，左侧为信息栏。[查看 PDF](assets/pdf-templates/framed.pdf) |
+| **面板分栏** | ![面板分栏](assets/pdf-templates/panels.webp) | 大号姓名与照片并排，栏目字号放大，右栏为浅灰色面板。[查看 PDF](assets/pdf-templates/panels.pdf) |
+| **照片通栏** | ![照片通栏](assets/pdf-templates/photo-panel.webp) | 右侧灰色通栏顶部放大照片，左边是斜体大号姓名。[查看 PDF](assets/pdf-templates/photo-panel.pdf) |
+| **紧凑单栏** | ![紧凑单栏](assets/pdf-templates/ats-classic.webp) | 信息密度最高的单栏：居中姓名，大写加下划线的栏目，职位与日期同排。[查看 PDF](assets/pdf-templates/ats-classic.pdf) |
 
 ### 国际化
 

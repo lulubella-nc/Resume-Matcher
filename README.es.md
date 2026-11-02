@@ -186,6 +186,23 @@ Las plantillas exportan PDF con texto real, en A4 o US Letter, que los sistemas 
 | **Vívido de una columna** | ![Vívido de una columna](assets/pdf-templates/vivid-single.webp) | Diseño de una columna colorido con encabezados de acento y viñetas de flecha. [Ver PDF](assets/pdf-templates/vivid-single.pdf) |
 | **Modern Deedy** | ![Modern Deedy](assets/pdf-templates/modern-deedy.webp) | Diseño denso de una página en Lato con encabezados de sección en mayúsculas de gris claro. [Ver PDF](assets/pdf-templates/modern-deedy.pdf) |
 | **Deedy** | ![Deedy](assets/pdf-templates/deedy.webp) | Diseño de dos columnas con nombre en trazo fino, columna izquierda estrecha y encabezados en gris claro. [Ver PDF](assets/pdf-templates/deedy.pdf) |
+| **Barra lateral con foto** | ![Barra lateral con foto](assets/pdf-templates/photo-sidebar.webp) | Columna de color con foto, contacto y aptitudes junto a tu trayectoria。[Ver PDF](assets/pdf-templates/photo-sidebar.pdf) |
+| **Editorial** | ![Editorial](assets/pdf-templates/editorial.webp) | Diseño aéreo de dos columnas con títulos serif dorados, retrato circular y una lista de aptitudes sin baremo。[Ver PDF](assets/pdf-templates/editorial.pdf) |
+| **Notas Laterales** | ![Notas Laterales](assets/pdf-templates/rail-notes.webp) | Barra derecha con contacto etiquetado, títulos con icono y aptitudes con línea。[Ver PDF](assets/pdf-templates/rail-notes.pdf) |
+| **Etiquetas** | ![Etiquetas](assets/pdf-templates/label-chips.webp) | Franja de color tras el nombre, etiquetas negras y aptitudes con línea。[Ver PDF](assets/pdf-templates/label-chips.pdf) |
+| **Líneas Clásicas** | ![Líneas Clásicas](assets/pdf-templates/classic-rules.webp) | Encabezado centrado, rótulos espaciados sobre líneas y fechas en columna propia。[Ver PDF](assets/pdf-templates/classic-rules.pdf) |
+| **Numerado** | ![Numerado](assets/pdf-templates/numbered.webp) | Secciones numeradas con líneas gruesas y contacto en cuadrícula etiqueta/valor。[Ver PDF](assets/pdf-templates/numbered.pdf) |
+| **Barra Nocturna** | ![Barra Nocturna](assets/pdf-templates/night-rail.webp) | Barra azul marino a toda altura con aptitudes de línea blanca。[Ver PDF](assets/pdf-templates/night-rail.pdf) |
+| **Barra de Color** | ![Barra de Color](assets/pdf-templates/band-rail.webp) | Franja de color superior y barra estrecha con aptitudes e idiomas。[Ver PDF](assets/pdf-templates/band-rail.pdf) |
+| **Cronología** | ![Cronología](assets/pdf-templates/timeline.webp) | Retrato centrado sobre el nombre, etiquetas con icono en mayúsculas y una línea de tiempo con un nodo por puesto。[Ver PDF](assets/pdf-templates/timeline.pdf) |
+| **Columna con línea** | ![Columna con línea](assets/pdf-templates/rule-rail.webp) | Nombre de gran tamaño sobre el puesto, columna izquierda cerrada por una línea vertical y habilidades subrayadas。[Ver PDF](assets/pdf-templates/rule-rail.pdf) |
+| **Columna serif** | ![Columna serif](assets/pdf-templates/serif-rail.webp) | Nombre en serif con color de acento junto a un retrato cuadrado, mayúsculas espaciadas y habilidades con línea。[Ver PDF](assets/pdf-templates/serif-rail.pdf) |
+| **Columna azul** | ![Columna azul](assets/pdf-templates/blue-rail.webp) | Retrato junto al nombre, etiquetas con icono en caja mixta y una línea fina bajo cada habilidad。[Ver PDF](assets/pdf-templates/blue-rail.pdf) |
+| **Banda oscura** | ![Banda oscura](assets/pdf-templates/night-band.webp) | Banda oscura con retrato centrado, nombre en serif y franja de contacto; después una sola columna。[Ver PDF](assets/pdf-templates/night-band.pdf) |
+| **Enmarcado** | ![Enmarcado](assets/pdf-templates/framed.webp) | Nombre y puesto dentro de un recuadro, títulos en mayúsculas con línea completa y columna izquierda。[Ver PDF](assets/pdf-templates/framed.pdf) |
+| **Paneles** | ![Paneles](assets/pdf-templates/panels.webp) | Nombre de gran tamaño junto al retrato, títulos grandes y paneles grises en la columna derecha。[Ver PDF](assets/pdf-templates/panels.pdf) |
+| **Foto lateral** | ![Foto lateral](assets/pdf-templates/photo-panel.webp) | Retrato alto que ocupa la cabecera de una columna gris, con el nombre en cursiva al lado。[Ver PDF](assets/pdf-templates/photo-panel.pdf) |
+| **ATS clásico** | ![ATS clásico](assets/pdf-templates/ats-classic.webp) | Una sola columna densa: nombre centrado, títulos en mayúsculas y puesto y fechas en la misma línea。[Ver PDF](assets/pdf-templates/ats-classic.pdf) |
 
 ### Internacionalización
 

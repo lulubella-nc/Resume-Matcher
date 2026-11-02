@@ -196,6 +196,23 @@ The templates export text-based PDFs in A4 or US Letter that applicant tracking 
 | **Vivid Single Column** | ![Vivid Single Column](assets/pdf-templates/vivid-single.webp) | Colorful single-column layout with accent headers and arrow bullets. [𝐕𝐢𝐞𝐰 𝐏𝐃𝐅](assets/pdf-templates/vivid-single.pdf) |
 | **Modern Deedy** | ![Modern Deedy](assets/pdf-templates/modern-deedy.webp) | Dense one-page layout in Lato with light grey uppercase section headings. [𝐕𝐢𝐞𝐰 𝐏𝐃𝐅](assets/pdf-templates/modern-deedy.pdf) |
 | **Deedy** | ![Deedy](assets/pdf-templates/deedy.webp) | Two-column layout with a hairline name, a narrow left column and light gray headings. [𝐕𝐢𝐞𝐰 𝐏𝐃𝐅](assets/pdf-templates/deedy.pdf) |
+| **Photo Sidebar** | ![Photo Sidebar](assets/pdf-templates/photo-sidebar.webp) | Colored rail on the right with a portrait photo, contact details and skills beside your story. [𝐕𝐢𝐞𝐰 𝐏𝐃𝐅](assets/pdf-templates/photo-sidebar.pdf) |
+| **Editorial** | ![Editorial](assets/pdf-templates/editorial.webp) | Airy two-column layout with gold serif headings, a round portrait and a labelled contact block. [𝐕𝐢𝐞𝐰 𝐏𝐃𝐅](assets/pdf-templates/editorial.pdf) |
+| **Rail Notes** | ![Rail Notes](assets/pdf-templates/rail-notes.webp) | Right rail with a labelled contact block, icon section headings and hairline-ruled skills. [𝐕𝐢𝐞𝐰 𝐏𝐃𝐅](assets/pdf-templates/rail-notes.pdf) |
+| **Label Chips** | ![Label Chips](assets/pdf-templates/label-chips.webp) | Colour band behind the name, black chip section labels and two ruled skill columns. [𝐕𝐢𝐞𝐰 𝐏𝐃𝐅](assets/pdf-templates/label-chips.pdf) |
+| **Classic Rules** | ![Classic Rules](assets/pdf-templates/classic-rules.webp) | Centred heading, letterspaced section labels over rules and dates in their own column. [𝐕𝐢𝐞𝐰 𝐏𝐃𝐅](assets/pdf-templates/classic-rules.pdf) |
+| **Numbered** | ![Numbered](assets/pdf-templates/numbered.webp) | Numbered sections with heavy rules and a label/value contact grid. [𝐕𝐢𝐞𝐰 𝐏𝐃𝐅](assets/pdf-templates/numbered.pdf) |
+| **Night Rail** | ![Night Rail](assets/pdf-templates/night-rail.webp) | Full-height navy rail with white ruled skills beside the story column. [𝐕𝐢𝐞𝐰 𝐏𝐃𝐅](assets/pdf-templates/night-rail.pdf) |
+| **Band Rail** | ![Band Rail](assets/pdf-templates/band-rail.webp) | Colour band header over a narrow rail holding skills and languages. [𝐕𝐢𝐞𝐰 𝐏𝐃𝐅](assets/pdf-templates/band-rail.pdf) |
+| **Timeline** | ![Timeline](assets/pdf-templates/timeline.webp) | Portrait centred over the name, icon labels in letterspaced caps and a spine hanging a node on every role. [𝐕𝐢𝐞𝐰 𝐏𝐃𝐅](assets/pdf-templates/timeline.pdf) |
+| **Rule Rail** | ![Rule Rail](assets/pdf-templates/rule-rail.webp) | Oversized name over the role, a left rail closed by a vertical rule and hairline-ruled skills. [𝐕𝐢𝐞𝐰 𝐏𝐃𝐅](assets/pdf-templates/rule-rail.pdf) |
+| **Serif Rail** | ![Serif Rail](assets/pdf-templates/serif-rail.webp) | Serif name in the accent colour beside a square portrait, letterspaced caps and a right rail of ruled skills. [𝐕𝐢𝐞𝐰 𝐏𝐃𝐅](assets/pdf-templates/serif-rail.pdf) |
+| **Blue Rail** | ![Blue Rail](assets/pdf-templates/blue-rail.webp) | Portrait beside the name, icon labels in sentence case and a light rule under every skill. [𝐕𝐢𝐞𝐰 𝐏𝐃𝐅](assets/pdf-templates/blue-rail.pdf) |
+| **Night Band** | ![Night Band](assets/pdf-templates/night-band.webp) | Dark band with a centred portrait, a serif name and a contact strip, then one reading column. [𝐕𝐢𝐞𝐰 𝐏𝐃𝐅](assets/pdf-templates/night-band.pdf) |
+| **Framed** | ![Framed](assets/pdf-templates/framed.webp) | Name and role inside a ruled box, uppercase headings on a full rule and a left rail. [𝐕𝐢𝐞𝐰 𝐏𝐃𝐅](assets/pdf-templates/framed.pdf) |
+| **Panels** | ![Panels](assets/pdf-templates/panels.webp) | Display name beside the portrait, oversized section labels and grey panels down the right column. [𝐕𝐢𝐞𝐰 𝐏𝐃𝐅](assets/pdf-templates/panels.pdf) |
+| **Photo Panel** | ![Photo Panel](assets/pdf-templates/photo-panel.webp) | Tall portrait filling the head of a grey right column, italic display name beside it. [𝐕𝐢𝐞𝐰 𝐏𝐃𝐅](assets/pdf-templates/photo-panel.pdf) |
+| **ATS Classic** | ![ATS Classic](assets/pdf-templates/ats-classic.webp) | Dense single column: centred name, uppercase ruled headings, role and dates on the entry line. [𝐕𝐢𝐞𝐰 𝐏𝐃𝐅](assets/pdf-templates/ats-classic.pdf) |
 
 ### Internationalization
 

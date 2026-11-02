@@ -184,6 +184,23 @@ Resume Matcher をご覧いただきありがとうございます。つなが�
 | **ビビッド1カラム** | ![ビビッド1カラム](assets/pdf-templates/vivid-single.webp) | アクセント見出しと矢印箇条書きのカラフルな1カラムレイアウト。[PDF を見る](assets/pdf-templates/vivid-single.pdf) |
 | **Modern Deedy** | ![Modern Deedy](assets/pdf-templates/modern-deedy.webp) | Lato書体の1ページ向け高密度レイアウト。見出しは淡いグレーの大文字。[PDF を見る](assets/pdf-templates/modern-deedy.pdf) |
 | **Deedy** | ![Deedy](assets/pdf-templates/deedy.webp) | 細字の名前、狭い左カラム、薄いグレーの見出しを備えた2カラムレイアウト。[PDF を見る](assets/pdf-templates/deedy.pdf) |
+| **フォトサイドバー** | ![フォトサイドバー](assets/pdf-templates/photo-sidebar.webp) | 左のカラー欄に写真・連絡先・スキル、右側に職務経歴を配置。[PDF を見る](assets/pdf-templates/photo-sidebar.pdf) |
+| **エディトリアル** | ![エディトリアル](assets/pdf-templates/editorial.webp) | ゴールドのセリフ見出し、丸い証明写真、評価を付けないスキル一覧を備えたゆったりした2カラム。[PDF を見る](assets/pdf-templates/editorial.pdf) |
+| **レールノート** | ![レールノート](assets/pdf-templates/rail-notes.webp) | 右レールにラベル付き連絡先、アイコン見出し、罫線付きスキル。[PDF を見る](assets/pdf-templates/rail-notes.pdf) |
+| **ラベルチップ** | ![ラベルチップ](assets/pdf-templates/label-chips.webp) | 名前の背後にカラーバンド、黒いチップ見出しと罫線の2列スキル。[PDF を見る](assets/pdf-templates/label-chips.pdf) |
+| **クラシックルール** | ![クラシックルール](assets/pdf-templates/classic-rules.webp) | 中央揃えの見出し、字間を広げた見出しと罫線、日付は左列。[PDF を見る](assets/pdf-templates/classic-rules.pdf) |
+| **ナンバリング** | ![ナンバリング](assets/pdf-templates/numbered.webp) | 番号付き見出しと太い罫線、連絡先はラベルと値のグリッド。[PDF を見る](assets/pdf-templates/numbered.pdf) |
+| **ナイトレール** | ![ナイトレール](assets/pdf-templates/night-rail.webp) | 濃紺の全高レールに白い罫線のスキル。[PDF を見る](assets/pdf-templates/night-rail.pdf) |
+| **バンドレール** | ![バンドレール](assets/pdf-templates/band-rail.webp) | 上部カラーバンドと、スキルと言語を置く細い左レール。[PDF を見る](assets/pdf-templates/band-rail.pdf) |
+| **タイムライン** | ![タイムライン](assets/pdf-templates/timeline.webp) | 写真を中央に置いた氏名、アイコン付きの大文字見出し、各職歴をノードでつなぐ縦線。[PDF を見る](assets/pdf-templates/timeline.pdf) |
+| **罫線サイドバー** | ![罫線サイドバー](assets/pdf-templates/rule-rail.webp) | 大きな氏名の下に職種、左は縦罫線で区切った情報欄、スキルは下線付き。[PDF を見る](assets/pdf-templates/rule-rail.pdf) |
+| **セリフサイドバー** | ![セリフサイドバー](assets/pdf-templates/serif-rail.webp) | アクセント色のセリフ体氏名と正方形の写真、字間を広げた見出し、右は罫線付きのスキル。[PDF を見る](assets/pdf-templates/serif-rail.pdf) |
+| **ブルーサイドバー** | ![ブルーサイドバー](assets/pdf-templates/blue-rail.webp) | 写真と氏名を横並び、アイコン付きの通常文見出し、各スキルの下に細い青線。[PDF を見る](assets/pdf-templates/blue-rail.pdf) |
+| **ダークバンド** | ![ダークバンド](assets/pdf-templates/night-band.webp) | 濃色の帯に中央寄せの写真とセリフ体氏名、連絡先の帯、本文は1カラム。[PDF を見る](assets/pdf-templates/night-band.pdf) |
+| **枠付き** | ![枠付き](assets/pdf-templates/framed.webp) | 氏名と職種を枠内に、全幅の下線付き大文字見出し、左に情報欄。[PDF を見る](assets/pdf-templates/framed.pdf) |
+| **パネル** | ![パネル](assets/pdf-templates/panels.webp) | 大きな氏名と写真を横並び、見出しを大きく、右列はグレーのパネル。[PDF を見る](assets/pdf-templates/panels.pdf) |
+| **写真パネル** | ![写真パネル](assets/pdf-templates/photo-panel.webp) | 右のグレー列の上部を大きな写真が占め、左にイタリックの大きな氏名。[PDF を見る](assets/pdf-templates/photo-panel.pdf) |
+| **ATS クラシック** | ![ATS クラシック](assets/pdf-templates/ats-classic.webp) | 高密度の1カラム：中央寄せの氏名、下線付き大文字見出し、職種と期間を同じ行に。[PDF を見る](assets/pdf-templates/ats-classic.pdf) |
 
 ### 国際化
 
