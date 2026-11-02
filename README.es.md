@@ -150,7 +150,7 @@ Puedes:
 - Modificar el contenido sugerido
 - Añadir/quitar secciones
 - Reordenar secciones con arrastrar y soltar
-- Elegir entre múltiples plantillas
+- Elegir entre 27 plantillas de currículum integradas
 
 ### Generador de carta de presentación y email
 
@@ -173,6 +173,8 @@ Exporta tu currículum adaptado y tu carta de presentación en PDF.
 ### Plantillas
 
 Las plantillas exportan PDF con texto real, en A4 o US Letter, que los sistemas de seguimiento de candidatos (ATS) pueden leer.
+
+Son 27: 12 diseños propios y 15 variantes de columnas, color y foto dibujadas por un mismo motor. Todas las vistas previas se generan con un currículum de ejemplo inventado, así que el repositorio no contiene datos de personas reales.
 
 | Nombre de plantilla | Vista previa | Descripción |
 |---------------------|-------------|-------------|

@@ -148,7 +148,7 @@ You can:
 - Modify suggested content
 - Add/remove sections
 - Rearrange sections via drag-and-drop
-- Choose from multiple resume templates
+- Choose from 27 built-in resume templates
 
 ### Cover Letter Generator
 
@@ -183,6 +183,8 @@ Export your tailored resume and cover letter in PDF.
 ### Templates
 
 The templates export text-based PDFs in A4 or US Letter that applicant tracking systems can parse.
+
+There are 27 of them: 12 hand-built layouts plus 15 presets drawn by one shared engine, covering column splits, accent colours and photo placements. Every preview below is rendered from an invented sample resume, so no real person's details are in this repository.
 
 | Template Name | Preview | Description |
 |---------------|---------|-------------|
