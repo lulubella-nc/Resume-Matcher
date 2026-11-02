@@ -45,7 +45,9 @@ export const DEMO_RESUME: ResumeData = {
     name: 'Jordan Ellis',
     title: 'Paralegal',
     email: 'jordan.ellis@example.com',
-    phone: '(561) 217-6321',
+    // 555-01xx is the North American range reserved for fiction, so the number
+    // cannot ring a real subscriber once the sample is published.
+    phone: '(202) 555-0143',
     location: 'New York, NY',
     website: 'jordanellis.example.com',
     photo: PORTRAIT,
