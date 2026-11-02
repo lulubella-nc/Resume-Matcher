@@ -15,13 +15,42 @@ export type TemplateType =
   | 'vivid'
   | 'vivid-single'
   | 'modern-deedy'
-  | 'deedy';
+  | 'deedy'
+  | 'photo-sidebar'
+  | 'editorial'
+  | 'rail-notes'
+  | 'label-chips'
+  | 'classic-rules'
+  | 'numbered'
+  | 'night-rail'
+  | 'band-rail'
+  | 'timeline'
+  | 'rule-rail'
+  | 'serif-rail'
+  | 'blue-rail'
+  | 'night-band'
+  | 'framed'
+  | 'panels'
+  | 'photo-panel'
+  | 'ats-classic';
 
 const TWO_COLUMN_TEMPLATES: ReadonlySet<TemplateType> = new Set([
   'swiss-two-column',
   'modern-two-column',
   'vivid',
   'deedy',
+  'photo-sidebar',
+  'editorial',
+  'rail-notes',
+  'night-rail',
+  'band-rail',
+  'timeline',
+  'rule-rail',
+  'serif-rail',
+  'blue-rail',
+  'framed',
+  'panels',
+  'photo-panel',
 ]);
 
 /** Two-column layouts can be read out of order by ATS parsers. */
@@ -29,9 +58,51 @@ export function isTwoColumnTemplate(template: TemplateType): boolean {
   return TWO_COLUMN_TEMPLATES.has(template);
 }
 
+/** Templates that can show a portrait photo and therefore read the photo controls. */
+const PHOTO_TEMPLATES: ReadonlySet<TemplateType> = new Set([
+  'photo-sidebar',
+  'editorial',
+  'rail-notes',
+  'night-rail',
+  'band-rail',
+  'timeline',
+  'serif-rail',
+  'blue-rail',
+  'night-band',
+  'panels',
+  'photo-panel',
+]);
+
+export function isPhotoTemplate(template: TemplateType): boolean {
+  return PHOTO_TEMPLATES.has(template);
+}
+
+export type PhotoShape = 'circle' | 'square';
+
+/** 1 = small, 2 = medium, 3 = large. */
+export type PhotoSizeLevel = 1 | 2 | 3;
+
 export type PageSize = 'A4' | 'LETTER';
 
-export type AccentColor = 'blue' | 'green' | 'orange' | 'red';
+/**
+ * Accent palettes. The first seven are the original saturated swatches; the rest are
+ * low-saturation neutrals for readers who want a quieter document (ash, graphite,
+ * navy, denim, sage, sand).
+ */
+export type AccentColor =
+  | 'blue'
+  | 'green'
+  | 'orange'
+  | 'red'
+  | 'purple'
+  | 'teal'
+  | 'gold'
+  | 'navy'
+  | 'denim'
+  | 'sage'
+  | 'ash'
+  | 'graphite'
+  | 'sand';
 
 export type SpacingLevel = 1 | 2 | 3 | 4 | 5;
 
@@ -67,6 +138,10 @@ export interface TemplateSettings {
   compactMode: boolean; // Apply tighter spacing across the board
   showContactIcons: boolean; // Show icons next to contact info
   accentColor: AccentColor; // Accent color for Modern template
+  // Photo controls (read by the photo templates only).
+  showPhoto: boolean;
+  photoShape: PhotoShape;
+  photoSize: PhotoSizeLevel;
   // On saved settings: which builder session saved them, and its save number.
   session?: string | null;
   revision?: number;
@@ -84,6 +159,9 @@ export const DEFAULT_TEMPLATE_SETTINGS: TemplateSettings = {
   compactMode: false,
   showContactIcons: false,
   accentColor: 'blue',
+  showPhoto: true,
+  photoShape: 'circle',
+  photoSize: 2,
 };
 
 /**
@@ -127,6 +205,13 @@ export const FONT_SIZE_MAP: Record<SpacingLevel, string> = {
   3: '14px', // default
   4: '15px',
   5: '16px',
+};
+
+/** Portrait sizes for the photo templates (see --resume-photo-size). */
+export const PHOTO_SIZE_MAP: Record<PhotoSizeLevel, string> = {
+  1: '56px',
+  2: '76px', // default
+  3: '96px',
 };
 
 export const HEADER_SCALE_MAP: Record<SpacingLevel, number> = {
@@ -201,6 +286,18 @@ export const ACCENT_COLOR_MAP: Record<
   green: { primary: '#15803D', light: '#DCFCE7', name: 'Green' },
   orange: { primary: '#EA580C', light: '#FED7AA', name: 'Orange' },
   red: { primary: '#DC2626', light: '#FEE2E2', name: 'Red' },
+  purple: { primary: '#6D28D9', light: '#EDE9FE', name: 'Purple' },
+  teal: { primary: '#0F766E', light: '#CCFBF1', name: 'Teal' },
+  // The Editorial template's signature: a muted type-gold sampled from its reference.
+  gold: { primary: '#A98C60', light: '#F4EEE1', name: 'Gold' },
+  // Low-saturation set. Ordered cool → warm so the picker reads as a ramp, and every
+  // primary stays legible as heading text on white (all ≥ 3:1, most ≥ 4.5:1).
+  navy: { primary: '#22395B', light: '#E2E8F1', name: 'Navy' },
+  denim: { primary: '#5A7794', light: '#E6EEF5', name: 'Denim' },
+  sage: { primary: '#6B8A73', light: '#EAF1EC', name: 'Sage' },
+  ash: { primary: '#7E858E', light: '#F0F1F3', name: 'Ash' },
+  graphite: { primary: '#3E444B', light: '#E6E8EA', name: 'Graphite' },
+  sand: { primary: '#9B8A76', light: '#F4EFE9', name: 'Sand' },
 };
 
 // Compact mode multiplier (applied to spacing values only, NOT line-height)
@@ -258,6 +355,8 @@ export function settingsToCssVars(
     // Accent colors for Modern template
     '--resume-accent-primary': accentColors.primary,
     '--resume-accent-light': accentColors.light,
+    // Portrait size for the photo templates
+    '--resume-photo-size': PHOTO_SIZE_MAP[s.photoSize ?? DEFAULT_TEMPLATE_SETTINGS.photoSize],
   } as React.CSSProperties;
 }
 
@@ -322,6 +421,107 @@ export const TEMPLATE_OPTIONS: TemplateInfo[] = [
     description:
       'Two-column layout with a hairline name, a narrow left column and light gray headings',
   },
+  {
+    id: 'photo-sidebar',
+    name: 'Photo Sidebar',
+    description: 'Colored rail with a portrait photo, contact details and skills beside your story',
+  },
+  {
+    id: 'editorial',
+    name: 'Editorial',
+    description:
+      'Airy two-column layout with gold serif headings, a round portrait and a plain skills list',
+  },
+  {
+    id: 'rail-notes',
+    name: 'Rail Notes',
+    description:
+      'Right rail with a labelled contact block, icon section headings and ruled skills',
+  },
+  {
+    id: 'label-chips',
+    name: 'Label Chips',
+    description:
+      'Colour band behind the name with black chip section labels and ruled skill columns',
+  },
+  {
+    id: 'classic-rules',
+    name: 'Classic Rules',
+    description:
+      'Centred heading, letterspaced section labels over rules and dates in their own column',
+  },
+  {
+    id: 'numbered',
+    name: 'Numbered',
+    description:
+      'Numbered sections with heavy rules and a label/value contact grid',
+  },
+  {
+    id: 'night-rail',
+    name: 'Night Rail',
+    description:
+      'Full-height navy rail with white ruled skills beside the story column',
+  },
+  {
+    id: 'band-rail',
+    name: 'Band Rail',
+    description:
+      'Colour band header over a narrow rail of skills and languages',
+  },
+  {
+    id: 'timeline',
+    name: 'Timeline',
+    description:
+      'Centred portrait over the name, icon labels in caps and a spine hanging a node on every role',
+  },
+  {
+    id: 'rule-rail',
+    name: 'Rule Rail',
+    description:
+      'Oversized name over the role, a left rail closed by a vertical rule and ruled skills',
+  },
+  {
+    id: 'serif-rail',
+    name: 'Serif Rail',
+    description:
+      'Serif name in accent beside a square portrait, letterspaced caps and a right rail of ruled skills',
+  },
+  {
+    id: 'blue-rail',
+    name: 'Blue Rail',
+    description:
+      'Portrait beside the name, icon labels in sentence case and a light rule under every skill',
+  },
+  {
+    id: 'night-band',
+    name: 'Night Band',
+    description:
+      'Dark band with a centred portrait, a serif name and a contact strip, then one reading column',
+  },
+  {
+    id: 'framed',
+    name: 'Framed',
+    description:
+      'Name and role inside a ruled box, uppercase headings on a full rule and a left rail',
+  },
+  {
+    id: 'panels',
+    name: 'Panels',
+    description:
+      'Display name beside the portrait, oversized section labels and grey panels down the right column',
+  },
+  {
+    id: 'photo-panel',
+    name: 'Photo Panel',
+    description:
+      'Tall portrait filling the head of a grey right column, italic display name beside it',
+  },
+  {
+    id: 'ats-classic',
+    name: 'ATS Classic',
+    description:
+      'Dense single column: centred name, uppercase headings on a rule, role and dates on the entry line',
+  },
 ];
 
 /**
@@ -338,6 +538,36 @@ export const TEMPLATE_FONT_PRESETS: Partial<
   latex: { headerFont: 'serif', bodyFont: 'serif' },
   clean: { headerFont: 'sans-serif', bodyFont: 'sans-serif' },
   'modern-deedy': { headerFont: 'sans-serif', bodyFont: 'sans-serif' },
+  'photo-sidebar': { headerFont: 'sans-serif', bodyFont: 'sans-serif' },
+  editorial: { headerFont: 'serif', bodyFont: 'sans-serif' },
+  'rail-notes': { headerFont: 'serif', bodyFont: 'sans-serif' },
+  'label-chips': { headerFont: 'sans-serif', bodyFont: 'sans-serif' },
+  'classic-rules': { headerFont: 'serif', bodyFont: 'sans-serif' },
+  numbered: { headerFont: 'sans-serif', bodyFont: 'sans-serif' },
+  'night-rail': { headerFont: 'sans-serif', bodyFont: 'sans-serif' },
+  'band-rail': { headerFont: 'sans-serif', bodyFont: 'sans-serif' },
+  timeline: { headerFont: 'serif', bodyFont: 'sans-serif' },
+  'rule-rail': { headerFont: 'sans-serif', bodyFont: 'sans-serif' },
+  'serif-rail': { headerFont: 'serif', bodyFont: 'serif' },
+  'blue-rail': { headerFont: 'sans-serif', bodyFont: 'sans-serif' },
+  'night-band': { headerFont: 'serif', bodyFont: 'sans-serif' },
+  framed: { headerFont: 'sans-serif', bodyFont: 'sans-serif' },
+  panels: { headerFont: 'sans-serif', bodyFont: 'sans-serif' },
+  'photo-panel': { headerFont: 'sans-serif', bodyFont: 'sans-serif' },
+  'ats-classic': { headerFont: 'serif', bodyFont: 'serif' },
+};
+
+/**
+ * Signature look applied when a template is selected: the accent and portrait
+ * scale that make the template match its reference design. Same contract as
+ * TEMPLATE_FONT_PRESETS — applied once on selection, then fully user-overridable.
+ */
+export const TEMPLATE_LOOK_PRESETS: Partial<
+  Record<TemplateType, { accentColor?: AccentColor; photoSize?: PhotoSizeLevel }>
+> = {
+  editorial: { accentColor: 'gold', photoSize: 3 },
+  'photo-panel': { photoSize: 3 },
+  panels: { photoSize: 2 },
 };
 
 /**
@@ -349,11 +579,23 @@ export function applyTemplatePreset(
   settings: TemplateSettings,
   template: TemplateType
 ): TemplateSettings {
-  const preset = TEMPLATE_FONT_PRESETS[template];
-  if (!preset) return { ...settings, template };
+  const fonts = TEMPLATE_FONT_PRESETS[template];
+  const look = TEMPLATE_LOOK_PRESETS[template];
+  if (!fonts && !look) return { ...settings, template };
+
   return {
     ...settings,
     template,
-    fontSize: { ...settings.fontSize, headerFont: preset.headerFont, bodyFont: preset.bodyFont },
+    ...(look?.accentColor ? { accentColor: look.accentColor } : {}),
+    ...(look?.photoSize ? { photoSize: look.photoSize } : {}),
+    ...(fonts
+      ? {
+          fontSize: {
+            ...settings.fontSize,
+            headerFont: fonts.headerFont,
+            bodyFont: fonts.bodyFont,
+          },
+        }
+      : {}),
   };
 }

@@ -483,6 +483,74 @@
         "deedy": {
           "name": "Deedy",
           "description": "Mise en page deux colonnes avec nom en trait fin, colonne gauche étroite et titres gris clair"
+        },
+        "photoSidebar": {
+          "name": "Colonne photo",
+          "description": "Colonne colorée avec photo, coordonnées et compétences à côté de votre parcours"
+        },
+        "editorial": {
+          "name": "Éditorial",
+          "description": "Mise en page aérée sur deux colonnes, titres serif dorés, portrait rond et une simple liste de compétences"
+        },
+        "railNotes": {
+          "name": "Notes Latérales",
+          "description": "Rail droit avec contact étiqueté, titres à icône et compétences soulignées"
+        },
+        "labelChips": {
+          "name": "Pastilles",
+          "description": "Bandeau de couleur derrière le nom, titres en pastilles et compétences soulignées"
+        },
+        "classicRules": {
+          "name": "Filets Classiques",
+          "description": "Titre centré, intitulés espacés sur filets et dates en colonne propre"
+        },
+        "numbered": {
+          "name": "Numéroté",
+          "description": "Sections numérotées avec filets épais et contact en grille étiquette/valeur"
+        },
+        "nightRail": {
+          "name": "Rail Nuit",
+          "description": "Rail bleu nuit pleine hauteur avec compétences soulignées en blanc"
+        },
+        "bandRail": {
+          "name": "Rail Bandeau",
+          "description": "Bandeau de couleur en tête et rail étroit pour compétences et langues"
+        },
+        "timeline": {
+          "name": "Chronologie",
+          "description": "Portrait centré au-dessus du nom, intitulés à icône en capitales et une ligne de temps avec un point par poste"
+        },
+        "ruleRail": {
+          "name": "Colonne filet",
+          "description": "Nom très grand au-dessus du poste, colonne de gauche fermée par un filet vertical et compétences soulignées"
+        },
+        "serifRail": {
+          "name": "Colonne serif",
+          "description": "Nom en serif coloré près d'un portrait carré, capitales espacées et compétences soulignées"
+        },
+        "blueRail": {
+          "name": "Colonne bleue",
+          "description": "Portrait à côté du nom, intitulés à icône en minuscules et un filet fin sous chaque compétence"
+        },
+        "nightBand": {
+          "name": "Bande sombre",
+          "description": "Bande sombre avec portrait centré, nom en serif et bandeau de contact, puis une seule colonne"
+        },
+        "framed": {
+          "name": "Encadré",
+          "description": "Nom et poste dans un cadre, titres en capitales soulignés et colonne de gauche"
+        },
+        "panels": {
+          "name": "Panneaux",
+          "description": "Nom très grand près du portrait, intitulés agrandis et panneaux gris dans la colonne de droite"
+        },
+        "photoPanel": {
+          "name": "Photo latérale",
+          "description": "Portrait haut en tête d'une colonne grise, nom en italique à côté"
+        },
+        "atsClassic": {
+          "name": "ATS classique",
+          "description": "Colonne unique dense : nom centré, titres en capitales soulignés, poste et dates sur la même ligne"
         }
       },
       "accentColor": "Couleur d'accentuation",
@@ -490,7 +558,16 @@
         "blue": "Bleu",
         "green": "Vert",
         "orange": "Orange",
-        "red": "Rouge"
+        "red": "Rouge",
+        "purple": "Violet",
+        "teal": "Bleu canard",
+        "gold": "Doré",
+        "navy": "Marine",
+        "denim": "Denim",
+        "sage": "Sauge",
+        "ash": "Cendre",
+        "graphite": "Graphite",
+        "sand": "Sable"
       },
       "pageSize": "Format de page",
       "margins": "Marges (mm)",
@@ -527,7 +604,22 @@
       "effectiveHeaderFont": "Police des en-têtes",
       "effectiveBodyFont": "Police du corps",
       "compactHint": "Le mode compact resserre l'espacement et l'interligne. Les marges et la taille de police de base restent littérales.",
-      "resetDefaults": "Rétablir les valeurs par défaut"
+      "resetDefaults": "Rétablir les valeurs par défaut",
+      "photo": {
+        "title": "Photo",
+        "show": "Afficher la photo",
+        "shape": "Forme",
+        "shapes": {
+          "circle": "Ronde",
+          "square": "Carrée"
+        },
+        "size": "Taille",
+        "sizes": {
+          "1": "S",
+          "2": "M",
+          "3": "L"
+        }
+      }
     },
     "personalInfoForm": {
       "placeholders": {
@@ -539,6 +631,22 @@
         "website": "portfolio.com",
         "linkedin": "linkedin.com/in/jean",
         "github": "github.com/jean"
+      },
+      "photo": {
+        "label": "Photo",
+        "empty": "Sans photo",
+        "upload": "Importer une photo",
+        "replace": "Remplacer",
+        "remove": "Supprimer",
+        "uploaded": "Photo importée (enregistrée dans le CV)",
+        "urlPlaceholder": "ou collez un lien d'image : https://…",
+        "hint": "JPG ou PNG jusqu'à 12 Mo ; réduite à 512 px et enregistrée dans le CV.",
+        "errors": {
+          "type": "Ce fichier n'est pas une image.",
+          "size": "L'image dépasse 12 Mo.",
+          "decode": "Impossible de lire l'image. Essayez un JPG ou un PNG.",
+          "unsupported": "Ce navigateur n'a pas pu traiter l'image."
+        }
       }
     },
     "leftPanel": {
@@ -1268,6 +1376,15 @@
       "languages": "Langues :",
       "certifications": "Certifications :",
       "awards": "Récompenses :"
+    },
+    "contact": {
+      "details": "Coordonnées",
+      "address": "Adresse",
+      "phone": "Téléphone",
+      "email": "E-mail",
+      "website": "Site web",
+      "linkedin": "LinkedIn",
+      "github": "GitHub"
     }
   },
   "coverLetter": {

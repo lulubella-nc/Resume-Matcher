@@ -10,6 +10,11 @@ import {
   ResumeVividSingle,
   ResumeModernDeedy,
   ResumeDeedy,
+  ResumePhotoSidebar,
+  ResumeEditorial,
+  ResumeProfile,
+  getProfilePreset,
+  isProfilePreset,
 } from '@/components/resume';
 import {
   type TemplateSettings,
@@ -54,6 +59,8 @@ export interface PersonalInfo {
   website?: string;
   linkedin?: string;
   github?: string;
+  /** Uploaded portrait (data URL) or an http(s) image link. */
+  photo?: string;
 }
 
 export interface Experience {
@@ -91,6 +98,15 @@ export interface AdditionalInfo {
   languages?: string[];
   certificationsTraining?: string[];
   awards?: string[];
+  /**
+   * Legacy proficiency map (skill name → 1..5).
+   *
+   * No template renders it any more: a scale states a level the user may never
+   * have claimed. The field stays declared because saved resumes still carry it
+   * and the backend preserves it on save; dropping it here would silently delete
+   * that data the next time a payload is rebuilt from this type.
+   */
+  skillLevels?: Record<string, number>;
 }
 
 export interface AdditionalSectionLabels {
@@ -115,6 +131,15 @@ export interface ResumeSectionHeadings {
 
 export interface ResumeFallbackLabels {
   name: string;
+  /** Heading over the contact block in rail templates ("Details"). */
+  details?: string;
+  /** Contact row labels, for templates that print them (Editorial). */
+  address?: string;
+  phone?: string;
+  email?: string;
+  website?: string;
+  linkedin?: string;
+  github?: string;
 }
 
 // Section Type for dynamic sections
@@ -300,6 +325,38 @@ const Resume: React.FC<ResumeProps> = ({
           data={resumeData}
           sectionHeadings={sectionHeadings}
           additionalSectionLabels={additionalSectionLabels}
+          fallbackLabels={fallbackLabels}
+        />
+      )}
+      {mergedSettings.template === 'photo-sidebar' && (
+        <ResumePhotoSidebar
+          earlierExperienceLabel={sectionHeadings?.earlierExperience}
+          data={resumeData}
+          showContactIcons={mergedSettings.showContactIcons}
+          showPhoto={mergedSettings.showPhoto}
+          photoShape={mergedSettings.photoShape}
+          sectionHeadings={sectionHeadings}
+          fallbackLabels={fallbackLabels}
+        />
+      )}
+      {mergedSettings.template === 'editorial' && (
+        <ResumeEditorial
+          earlierExperienceLabel={sectionHeadings?.earlierExperience}
+          data={resumeData}
+          showPhoto={mergedSettings.showPhoto}
+          photoShape={mergedSettings.photoShape}
+          sectionHeadings={sectionHeadings}
+          fallbackLabels={fallbackLabels}
+        />
+      )}
+      {isProfilePreset(mergedSettings.template) && (
+        <ResumeProfile
+          preset={getProfilePreset(mergedSettings.template)}
+          earlierExperienceLabel={sectionHeadings?.earlierExperience}
+          data={resumeData}
+          showPhoto={mergedSettings.showPhoto}
+          photoShape={mergedSettings.photoShape}
+          sectionHeadings={sectionHeadings}
           fallbackLabels={fallbackLabels}
         />
       )}

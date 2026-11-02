@@ -483,6 +483,74 @@
         "deedy": {
           "name": "Deedy",
           "description": "細字の名前、狭い左カラム、薄いグレーの見出しを備えた2カラムレイアウト"
+        },
+        "photoSidebar": {
+          "name": "フォトサイドバー",
+          "description": "左のカラー欄に写真・連絡先・スキル、右側に職務経歴を配置"
+        },
+        "editorial": {
+          "name": "エディトリアル",
+          "description": "ゴールドのセリフ見出し、丸い証明写真、評価を付けないスキル一覧を備えたゆったりした2カラム"
+        },
+        "railNotes": {
+          "name": "レールノート",
+          "description": "右レールにラベル付き連絡先、アイコン見出し、罫線付きスキル"
+        },
+        "labelChips": {
+          "name": "ラベルチップ",
+          "description": "名前の背後にカラーバンド、黒いチップ見出しと罫線の2列スキル"
+        },
+        "classicRules": {
+          "name": "クラシックルール",
+          "description": "中央揃えの見出し、字間を広げた見出しと罫線、日付は左列"
+        },
+        "numbered": {
+          "name": "ナンバリング",
+          "description": "番号付き見出しと太い罫線、連絡先はラベルと値のグリッド"
+        },
+        "nightRail": {
+          "name": "ナイトレール",
+          "description": "濃紺の全高レールに白い罫線のスキル"
+        },
+        "bandRail": {
+          "name": "バンドレール",
+          "description": "上部カラーバンドと、スキルと言語を置く細い左レール"
+        },
+        "timeline": {
+          "name": "タイムライン",
+          "description": "写真を中央に置いた氏名、アイコン付きの大文字見出し、各職歴をノードでつなぐ縦線"
+        },
+        "ruleRail": {
+          "name": "罫線サイドバー",
+          "description": "大きな氏名の下に職種、左は縦罫線で区切った情報欄、スキルは下線付き"
+        },
+        "serifRail": {
+          "name": "セリフサイドバー",
+          "description": "アクセント色のセリフ体氏名と正方形の写真、字間を広げた見出し、右は罫線付きのスキル"
+        },
+        "blueRail": {
+          "name": "ブルーサイドバー",
+          "description": "写真と氏名を横並び、アイコン付きの通常文見出し、各スキルの下に細い青線"
+        },
+        "nightBand": {
+          "name": "ダークバンド",
+          "description": "濃色の帯に中央寄せの写真とセリフ体氏名、連絡先の帯、本文は1カラム"
+        },
+        "framed": {
+          "name": "枠付き",
+          "description": "氏名と職種を枠内に、全幅の下線付き大文字見出し、左に情報欄"
+        },
+        "panels": {
+          "name": "パネル",
+          "description": "大きな氏名と写真を横並び、見出しを大きく、右列はグレーのパネル"
+        },
+        "photoPanel": {
+          "name": "写真パネル",
+          "description": "右のグレー列の上部を大きな写真が占め、左にイタリックの大きな氏名"
+        },
+        "atsClassic": {
+          "name": "ATS クラシック",
+          "description": "高密度の1カラム：中央寄せの氏名、下線付き大文字見出し、職種と期間を同じ行に"
         }
       },
       "accentColor": "アクセントカラー",
@@ -490,7 +558,16 @@
         "blue": "青",
         "green": "緑",
         "orange": "オレンジ",
-        "red": "赤"
+        "red": "赤",
+        "purple": "パープル",
+        "teal": "ティール",
+        "gold": "ゴールド",
+        "navy": "ネイビー",
+        "denim": "デニム",
+        "sage": "セージ",
+        "ash": "アッシュ",
+        "graphite": "グラファイト",
+        "sand": "サンド"
       },
       "pageSize": "ページサイズ",
       "margins": "余白（mm）",
@@ -527,7 +604,22 @@
       "effectiveHeaderFont": "見出しフォント",
       "effectiveBodyFont": "本文フォント",
       "compactHint": "コンパクトモードでは間隔と行間が詰まります。余白と本文フォントサイズは維持されます。",
-      "resetDefaults": "デフォルトに戻す"
+      "resetDefaults": "デフォルトに戻す",
+      "photo": {
+        "title": "証明写真",
+        "show": "写真を表示",
+        "shape": "形",
+        "shapes": {
+          "circle": "丸",
+          "square": "四角"
+        },
+        "size": "サイズ",
+        "sizes": {
+          "1": "小",
+          "2": "中",
+          "3": "大"
+        }
+      }
     },
     "personalInfoForm": {
       "placeholders": {
@@ -539,6 +631,22 @@
         "website": "portfolio.com",
         "linkedin": "linkedin.com/in/taro",
         "github": "github.com/taro"
+      },
+      "photo": {
+        "label": "写真",
+        "empty": "写真なし",
+        "upload": "写真をアップロード",
+        "replace": "変更",
+        "remove": "削除",
+        "uploaded": "アップロード済み（履歴書に保存）",
+        "urlPlaceholder": "または画像リンクを貼り付け: https://…",
+        "hint": "JPG/PNG・12MB まで。512px に縮小して履歴書に保存します。",
+        "errors": {
+          "type": "画像ファイルではありません。",
+          "size": "画像が 12MB を超えています。",
+          "decode": "画像を読み込めませんでした。JPG か PNG をお試しください。",
+          "unsupported": "このブラウザでは画像を処理できません。"
+        }
       }
     },
     "leftPanel": {
@@ -1268,6 +1376,15 @@
       "languages": "言語：",
       "certifications": "資格：",
       "awards": "受賞歴："
+    },
+    "contact": {
+      "details": "詳細",
+      "address": "住所",
+      "phone": "電話",
+      "email": "メール",
+      "website": "ウェブサイト",
+      "linkedin": "LinkedIn",
+      "github": "GitHub"
     }
   },
   "coverLetter": {

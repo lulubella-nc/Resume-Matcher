@@ -22,6 +22,31 @@ CONTACT_ORDER_BY_TEMPLATE: dict[str, tuple[str, ...]] = {
     "vivid": ("website", "linkedin", "github", "email", "phone", "location"),
     "vivid-single": ("website", "linkedin", "github", "email", "phone", "location"),
     "deedy": ("website", "linkedin", "github", "email", "phone", "location"),
+    # photo-sidebar prints the contact block inside the left rail, in this order.
+    "photo-sidebar": ("email", "phone", "location", "website", "linkedin", "github"),
+    # editorial labels each contact row (Address, Phone, Email, ...) under a rail
+    # heading, in this order; the rail is read after the story column.
+    "editorial": ("location", "phone", "email", "website", "linkedin", "github"),
+    # rail-notes / night-rail label each contact row in a rail read after the story.
+    "rail-notes": ("location", "phone", "email", "website", "linkedin", "github"),
+    "night-rail": ("location", "phone", "email", "website", "linkedin", "github"),
+    # band-rail prints the contact block inside the band, above both columns.
+    "band-rail": ("location", "phone", "email", "website", "linkedin", "github"),
+    # The single-column presets print "Name, Role" centred, then the contact line.
+    "classic-rules": ("location", "phone", "email", "website", "linkedin", "github"),
+    "label-chips": ("location", "phone", "email", "website", "linkedin", "github"),
+    "numbered": ("location", "phone", "email", "website", "linkedin", "github"),
+    # The second wave keeps the same labelled order in the rail, the band or the
+    # centred line, so they share one entry.
+    "timeline": ("location", "phone", "email", "website", "linkedin", "github"),
+    "rule-rail": ("location", "phone", "email", "website", "linkedin", "github"),
+    "serif-rail": ("location", "phone", "email", "website", "linkedin", "github"),
+    "blue-rail": ("location", "phone", "email", "website", "linkedin", "github"),
+    "night-band": ("location", "phone", "email", "website", "linkedin", "github"),
+    "framed": ("location", "phone", "email", "website", "linkedin", "github"),
+    "panels": ("location", "phone", "email", "website", "linkedin", "github"),
+    "photo-panel": ("location", "phone", "email", "website", "linkedin", "github"),
+    "ats-classic": ("location", "phone", "email", "website", "linkedin", "github"),
 }
 LINK_FIELDS = frozenset({"website", "linkedin", "github"})
 
@@ -51,6 +76,31 @@ ENTRY_ORDER_BY_TEMPLATE: dict[str, dict[str, tuple[str, ...]]] = {
         "education": ("degree", "institution", "years"),
     },
     "deedy": {"workExperience": ("company", "title", "years", "location")},
+    # Rail first, then the main column: the rail's education block is read before
+    # the experience story, and each entry prints title over "company · location".
+    "photo-sidebar": {"workExperience": ("title", "company", "location", "years")},
+    # "Title, Company" prints on one line, then "dates  •  location" beneath it.
+    "editorial": {"workExperience": ("title", "company", "years", "location")},
+    # "Title, Company" on one line, then "dates · location".
+    "rail-notes": {"workExperience": ("title", "company", "years", "location")},
+    "night-rail": {"workExperience": ("title", "company", "years", "location")},
+    "band-rail": {"workExperience": ("title", "company", "years", "location")},
+    # Dates own the left column, so pdfminer reads them before the title.
+    "numbered": {"workExperience": ("years", "location", "title", "company")},
+    # Centred header, dates in a left column, location right-aligned with the title.
+    "classic-rules": {"workExperience": ("years", "title", "company", "location")},
+    "label-chips": {"workExperience": ("title", "company", "years", "location")},
+    # Same entry shape as rail-notes: "Title, Company", then "dates · location".
+    "timeline": {"workExperience": ("title", "company", "years", "location")},
+    "serif-rail": {"workExperience": ("title", "company", "years", "location")},
+    "blue-rail": {"workExperience": ("title", "company", "years", "location")},
+    "night-band": {"workExperience": ("title", "company", "years", "location")},
+    "panels": {"workExperience": ("title", "company", "years", "location")},
+    "photo-panel": {"workExperience": ("title", "company", "years", "location")},
+    # Location sits on the title line, so it is read before the dates beneath it.
+    "rule-rail": {"workExperience": ("title", "company", "location", "years")},
+    "framed": {"workExperience": ("title", "company", "location", "years")},
+    "ats-classic": {"workExperience": ("title", "company", "location", "years")},
 }
 
 

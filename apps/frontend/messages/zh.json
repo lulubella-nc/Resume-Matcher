@@ -483,6 +483,74 @@
         "deedy": {
           "name": "Deedy",
           "description": "双栏布局，细体姓名、窄左栏与浅灰色标题"
+        },
+        "photoSidebar": {
+          "name": "侧栏照片",
+          "description": "左侧彩色栏放照片、联系方式与技能，右侧讲述你的经历"
+        },
+        "editorial": {
+          "name": "雅致",
+          "description": "金色衬线标题、圆形证件照与纯技能清单的宽松双栏版式"
+        },
+        "railNotes": {
+          "name": "边栏札记",
+          "description": "右侧栏放带标签的联系方式、图标栏目头与细线技能"
+        },
+        "labelChips": {
+          "name": "标签块",
+          "description": "姓名后的彩色色带、黑色标签式栏目头与细线双列技能"
+        },
+        "classicRules": {
+          "name": "经典细线",
+          "description": "居中抬头，栏目名加宽字距配细线，日期独立左栏"
+        },
+        "numbered": {
+          "name": "编号",
+          "description": "栏目编号配粗线，联系方式为标签值网格"
+        },
+        "nightRail": {
+          "name": "夜色边栏",
+          "description": "通栏深蓝侧栏配白色细线技能"
+        },
+        "bandRail": {
+          "name": "色带侧栏",
+          "description": "顶部彩色色带，窄左栏放技能与语言"
+        },
+        "timeline": {
+          "name": "时间轴",
+          "description": "照片居中压在姓名上方，栏目用带图标的大写标签，每条经历都挂在一个时间轴节点上"
+        },
+        "ruleRail": {
+          "name": "分隔栏",
+          "description": "超大姓名配职位说明，左栏以竖线分隔，技能下方带细线"
+        },
+        "serifRail": {
+          "name": "衬线分栏",
+          "description": "衬线体的强调色姓名紧挨方形照片，栏目为字距大写，右栏技能带分隔线"
+        },
+        "blueRail": {
+          "name": "蓝线分栏",
+          "description": "照片与姓名并排，栏目为图标加粗标题，每项技能下有一条浅蓝细线"
+        },
+        "nightBand": {
+          "name": "深色横幅",
+          "description": "深色横幅内居中放照片与衬线姓名，下方是联系方式条，正文单栏阅读"
+        },
+        "framed": {
+          "name": "方框抬头",
+          "description": "姓名与职位装进方框，栏目为全宽下划线的大写标题，左侧为信息栏"
+        },
+        "panels": {
+          "name": "面板分栏",
+          "description": "大号姓名与照片并排，栏目字号放大，右栏为浅灰色面板"
+        },
+        "photoPanel": {
+          "name": "照片通栏",
+          "description": "右侧灰色通栏顶部放大照片，左边是斜体大号姓名"
+        },
+        "atsClassic": {
+          "name": "紧凑单栏",
+          "description": "信息密度最高的单栏：居中姓名，大写加下划线的栏目，职位与日期同排"
         }
       },
       "accentColor": "强调色",
@@ -490,7 +558,16 @@
         "blue": "蓝色",
         "green": "绿色",
         "orange": "橙色",
-        "red": "红色"
+        "red": "红色",
+        "purple": "紫色",
+        "teal": "青色",
+        "gold": "金色",
+        "navy": "深蓝",
+        "denim": "灰蓝",
+        "sage": "淡绿",
+        "ash": "浅灰",
+        "graphite": "深灰",
+        "sand": "淡米"
       },
       "pageSize": "纸张尺寸",
       "margins": "页边距（mm）",
@@ -527,7 +604,22 @@
       "effectiveHeaderFont": "标题字体",
       "effectiveBodyFont": "正文字体",
       "compactHint": "紧凑模式会收紧间距与行高；页边距与正文字号保持不变。",
-      "resetDefaults": "恢复默认设置"
+      "resetDefaults": "恢复默认设置",
+      "photo": {
+        "title": "证件照",
+        "show": "显示照片",
+        "shape": "形状",
+        "shapes": {
+          "circle": "圆形",
+          "square": "方形"
+        },
+        "size": "尺寸",
+        "sizes": {
+          "1": "小",
+          "2": "中",
+          "3": "大"
+        }
+      }
     },
     "personalInfoForm": {
       "placeholders": {
@@ -539,6 +631,22 @@
         "website": "portfolio.com",
         "linkedin": "linkedin.com/in/zhangsan",
         "github": "github.com/zhangsan"
+      },
+      "photo": {
+        "label": "照片",
+        "empty": "无照片",
+        "upload": "上传照片",
+        "replace": "更换",
+        "remove": "删除",
+        "uploaded": "已上传（随简历保存）",
+        "urlPlaceholder": "或粘贴图片链接：https://…",
+        "hint": "支持 JPG/PNG，最大 12 MB；自动压缩到 512 px 并存入简历。",
+        "errors": {
+          "type": "该文件不是图片。",
+          "size": "图片超过 12 MB。",
+          "decode": "无法读取这张图片，请换 JPG 或 PNG。",
+          "unsupported": "当前浏览器无法处理该图片。"
+        }
       }
     },
     "leftPanel": {
@@ -1268,6 +1376,15 @@
       "languages": "语言能力：",
       "certifications": "培训与证书：",
       "awards": "荣誉奖项："
+    },
+    "contact": {
+      "details": "联系方式",
+      "address": "地址",
+      "phone": "电话",
+      "email": "邮箱",
+      "website": "网站",
+      "linkedin": "领英",
+      "github": "GitHub"
     }
   },
   "coverLetter": {

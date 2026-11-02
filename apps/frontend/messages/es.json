@@ -483,6 +483,74 @@
         "deedy": {
           "name": "Deedy",
           "description": "Diseño de dos columnas con nombre en trazo fino, columna izquierda estrecha y encabezados en gris claro"
+        },
+        "photoSidebar": {
+          "name": "Barra lateral con foto",
+          "description": "Columna de color con foto, contacto y aptitudes junto a tu trayectoria"
+        },
+        "editorial": {
+          "name": "Editorial",
+          "description": "Diseño aéreo de dos columnas con títulos serif dorados, retrato circular y una lista de aptitudes sin baremo"
+        },
+        "railNotes": {
+          "name": "Notas Laterales",
+          "description": "Barra derecha con contacto etiquetado, títulos con icono y aptitudes con línea"
+        },
+        "labelChips": {
+          "name": "Etiquetas",
+          "description": "Franja de color tras el nombre, etiquetas negras y aptitudes con línea"
+        },
+        "classicRules": {
+          "name": "Líneas Clásicas",
+          "description": "Encabezado centrado, rótulos espaciados sobre líneas y fechas en columna propia"
+        },
+        "numbered": {
+          "name": "Numerado",
+          "description": "Secciones numeradas con líneas gruesas y contacto en cuadrícula etiqueta/valor"
+        },
+        "nightRail": {
+          "name": "Barra Nocturna",
+          "description": "Barra azul marino a toda altura con aptitudes de línea blanca"
+        },
+        "bandRail": {
+          "name": "Barra de Color",
+          "description": "Franja de color superior y barra estrecha con aptitudes e idiomas"
+        },
+        "timeline": {
+          "name": "Cronología",
+          "description": "Retrato centrado sobre el nombre, etiquetas con icono en mayúsculas y una línea de tiempo con un nodo por puesto"
+        },
+        "ruleRail": {
+          "name": "Columna con línea",
+          "description": "Nombre de gran tamaño sobre el puesto, columna izquierda cerrada por una línea vertical y habilidades subrayadas"
+        },
+        "serifRail": {
+          "name": "Columna serif",
+          "description": "Nombre en serif con color de acento junto a un retrato cuadrado, mayúsculas espaciadas y habilidades con línea"
+        },
+        "blueRail": {
+          "name": "Columna azul",
+          "description": "Retrato junto al nombre, etiquetas con icono en caja mixta y una línea fina bajo cada habilidad"
+        },
+        "nightBand": {
+          "name": "Banda oscura",
+          "description": "Banda oscura con retrato centrado, nombre en serif y franja de contacto; después una sola columna"
+        },
+        "framed": {
+          "name": "Enmarcado",
+          "description": "Nombre y puesto dentro de un recuadro, títulos en mayúsculas con línea completa y columna izquierda"
+        },
+        "panels": {
+          "name": "Paneles",
+          "description": "Nombre de gran tamaño junto al retrato, títulos grandes y paneles grises en la columna derecha"
+        },
+        "photoPanel": {
+          "name": "Foto lateral",
+          "description": "Retrato alto que ocupa la cabecera de una columna gris, con el nombre en cursiva al lado"
+        },
+        "atsClassic": {
+          "name": "ATS clásico",
+          "description": "Una sola columna densa: nombre centrado, títulos en mayúsculas y puesto y fechas en la misma línea"
         }
       },
       "accentColor": "Color de acento",
@@ -490,7 +558,16 @@
         "blue": "Azul",
         "green": "Verde",
         "orange": "Naranja",
-        "red": "Rojo"
+        "red": "Rojo",
+        "purple": "Morado",
+        "teal": "Verde azulado",
+        "gold": "Dorado",
+        "navy": "Azul marino",
+        "denim": "Denim",
+        "sage": "Salvia",
+        "ash": "Ceniza",
+        "graphite": "Grafito",
+        "sand": "Arena"
       },
       "pageSize": "Tamaño de página",
       "margins": "Márgenes (mm)",
@@ -527,7 +604,22 @@
       "effectiveHeaderFont": "Fuente de encabezados",
       "effectiveBodyFont": "Fuente del cuerpo",
       "compactHint": "El modo compacto reduce el espaciado y el interlineado. Los márgenes y la fuente base se mantienen.",
-      "resetDefaults": "Restablecer valores"
+      "resetDefaults": "Restablecer valores",
+      "photo": {
+        "title": "Fotografía",
+        "show": "Mostrar foto",
+        "shape": "Forma",
+        "shapes": {
+          "circle": "Redonda",
+          "square": "Cuadrada"
+        },
+        "size": "Tamaño",
+        "sizes": {
+          "1": "S",
+          "2": "M",
+          "3": "L"
+        }
+      }
     },
     "personalInfoForm": {
       "placeholders": {
@@ -539,6 +631,22 @@
         "website": "portfolio.com",
         "linkedin": "linkedin.com/in/juan",
         "github": "github.com/juan"
+      },
+      "photo": {
+        "label": "Fotografía",
+        "empty": "Sin foto",
+        "upload": "Subir foto",
+        "replace": "Cambiar",
+        "remove": "Quitar",
+        "uploaded": "Foto subida (guardada en el CV)",
+        "urlPlaceholder": "o pega un enlace de imagen: https://…",
+        "hint": "JPG o PNG de hasta 12 MB; se reduce a 512 px y se guarda en el CV.",
+        "errors": {
+          "type": "Ese archivo no es una imagen.",
+          "size": "La imagen supera los 12 MB.",
+          "decode": "No se pudo leer la imagen. Prueba con JPG o PNG.",
+          "unsupported": "Este navegador no pudo procesar la imagen."
+        }
       }
     },
     "leftPanel": {
@@ -1268,6 +1376,15 @@
       "languages": "Idiomas:",
       "certifications": "Certificaciones:",
       "awards": "Premios:"
+    },
+    "contact": {
+      "details": "Detalles",
+      "address": "Dirección",
+      "phone": "Teléfono",
+      "email": "Correo",
+      "website": "Sitio web",
+      "linkedin": "LinkedIn",
+      "github": "GitHub"
     }
   },
   "coverLetter": {

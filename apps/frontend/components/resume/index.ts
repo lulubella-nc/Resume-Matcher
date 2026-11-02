@@ -8,3 +8,8 @@ export { ResumeVivid } from './resume-vivid';
 export { ResumeVividSingle } from './resume-vivid-single';
 export { ResumeModernDeedy } from './resume-modern-deedy';
 export { ResumeDeedy } from './resume-deedy';
+export { ResumePhotoSidebar } from './resume-photo-sidebar';
+export { ResumeEditorial } from './resume-editorial';
+export { ResumeProfile } from './resume-profile';
+export { getProfilePreset, PROFILE_PRESETS, isProfilePreset } from './profile-presets';
+export type { ProfilePreset, ProfilePresetId } from './profile-presets';

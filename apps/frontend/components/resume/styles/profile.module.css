@@ -1,0 +1,901 @@
+@import './_tokens.css';
+
+/*
+  Profile layouts
+  ID: rail-notes · label-chips · classic-rules · numbered · night-rail · band-rail
+
+  One stylesheet for every preset in `profile-presets.ts`. Each preset drives a
+  layout class plus a small set of appearance classes; nothing here is styled per
+  template id, so a new design is a preset entry, not new CSS.
+
+  Layout notes:
+  - The story column is written first in the DOM in every layout (the rail is placed
+    with grid-column), so an ATS reads profile → experience before the rail.
+  - Rails carry their own background; `night-rail` inverts the text on it.
+  - Nothing encodes a proficiency: `skillBar` is a hairline under the name, not a
+    filled track.
+*/
+
+.page {
+  --profile-ink: #1b1a18;
+  --profile-body: #33312d;
+  --profile-soft: #6f6a63;
+  --profile-rule: #d8d3ca;
+
+  color: var(--profile-ink);
+  min-width: 0;
+}
+
+/* ---------- Layout shells ---------- */
+
+.single {
+  display: block;
+  min-width: 0;
+}
+
+.columns {
+  display: grid;
+  grid-template-columns: minmax(0, 66fr) minmax(0, 34fr);
+  column-gap: 1.8rem;
+  align-items: start;
+  min-width: 0;
+}
+
+.layout-rail-left .columns {
+  grid-template-columns: minmax(0, 30fr) minmax(0, 70fr);
+  column-gap: 1.6rem;
+}
+
+.layout-night-rail {
+  min-height: 100%;
+}
+
+.layout-night-rail .columns {
+  grid-template-columns: minmax(0, 64fr) minmax(0, 36fr);
+  column-gap: 0;
+  align-items: stretch;
+  min-height: 100%;
+}
+
+.story {
+  grid-column: 1;
+  grid-row: 1;
+  min-width: 0;
+}
+
+.rail {
+  grid-column: 2;
+  grid-row: 1;
+  min-width: 0;
+  padding-left: 1.35rem;
+  border-left: 1px solid var(--profile-rule);
+}
+
+.layout-rail-left .rail {
+  grid-column: 1;
+  grid-row: 1;
+  padding-left: 0;
+  padding-right: 1.2rem;
+  border-left: 0;
+  border-right: 1px solid var(--profile-rule);
+}
+
+.layout-rail-left .story {
+  grid-column: 2;
+}
+
+/* Dark rail runs the full height and bleeds to the page edge. */
+.layout-night-rail .rail {
+  grid-column: 2;
+  padding: 1.7rem 1.4rem 2rem 1.5rem;
+  border-left: 0;
+  background-color: var(--profile-surface);
+  color: var(--profile-on-surface);
+  align-self: stretch;
+}
+
+.layout-night-rail .story {
+  padding-right: 1.5rem;
+}
+
+/* ---------- Identity: plain / centred ---------- */
+
+.identity {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.85rem;
+  margin-bottom: calc(var(--section-gap) * 1.15);
+}
+
+.identityText {
+  min-width: 0;
+}
+
+.portrait {
+  width: 3.4rem;
+  height: 3.4rem;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.name {
+  font-family: var(--header-font);
+  font-size: calc(var(--font-size-base) * 2.05);
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: -0.01em;
+  margin: 0;
+}
+
+.role {
+  font-size: calc(var(--font-size-base) * 0.95);
+  color: var(--profile-soft);
+  margin: 0.28rem 0 0;
+}
+
+.contactInline {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin: 0.45rem 0 0;
+  font-size: calc(var(--font-size-base) * 0.8);
+  color: var(--profile-soft);
+}
+
+.contactSep {
+  margin-right: 0.4rem;
+}
+
+.contactLink {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Centred identity (classic-rules). */
+.page[data-header='centered'] .identity {
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.page[data-header='centered'] .contactInline {
+  justify-content: center;
+}
+
+/* ---------- Identity: colour band ---------- */
+
+.band {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  background-color: var(--profile-surface);
+  color: var(--profile-on-surface);
+  padding: 1.6rem 1.7rem 1.5rem;
+  margin-bottom: calc(var(--section-gap) * 1.35);
+}
+
+.bandPortrait {
+  width: 4.6rem;
+  height: 4.6rem;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.bandText {
+  min-width: 0;
+  flex: 1 1 auto;
+}
+
+.bandName {
+  font-family: var(--header-font);
+  font-size: calc(var(--font-size-base) * 2.35);
+  font-weight: 800;
+  line-height: 0.98;
+  letter-spacing: -0.015em;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+.bandRole {
+  font-size: calc(var(--font-size-base) * 0.98);
+  margin: 0.4rem 0 0;
+}
+
+.bandContacts {
+  display: flex;
+  flex-direction: column;
+  gap: 0.12rem;
+  font-size: calc(var(--font-size-base) * 0.82);
+  text-align: left;
+  max-width: 45%;
+}
+
+.bandContactLine {
+  display: block;
+}
+
+/* Section rhythm: the blocks carry no class of their own (they only spread
+   data-resume-section for pagination), so spacing is set here. */
+.page [data-resume-section] {
+  margin-bottom: calc(var(--section-gap) * 1.5);
+}
+
+.page [data-resume-section]:last-child {
+  margin-bottom: 0;
+}
+
+/* ---------- Section headings ---------- */
+
+.headPlain,
+.headSerif {
+  font-size: calc(var(--font-size-base) * 1.02);
+  font-weight: 700;
+  margin: 0 0 calc(var(--item-gap) * 2.6);
+  line-height: 1.3;
+}
+
+.headSerif {
+  font-family: var(--header-font);
+  font-weight: 400;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  font-size: calc(var(--font-size-base) * 0.88);
+}
+
+/* icon + tracked caps sitting on a hairline */
+.headIcon {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-family: var(--header-font);
+  font-size: calc(var(--font-size-base) * 0.86);
+  font-weight: 700;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  margin: 0 0 calc(var(--item-gap) * 2.6);
+  padding-top: calc(var(--item-gap) * 2.2);
+  border-top: 1px solid var(--profile-rule);
+}
+
+.headIconGlyph {
+  color: var(--profile-soft);
+  flex-shrink: 0;
+}
+
+/* black chip label */
+.headChip {
+  margin: 0 0 calc(var(--item-gap) * 3.4);
+  font-size: calc(var(--font-size-base) * 0.7);
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.chipLabel {
+  display: inline-block;
+  background-color: var(--profile-accent);
+  color: #ffffff;
+  padding: 0.24rem 0.55rem 0.2rem;
+}
+
+/* letterspaced label over a full-width rule, content beneath (classic-rules) */
+.headRuleLabel {
+  font-family: var(--header-font);
+  font-size: calc(var(--font-size-base) * 0.78);
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  font-weight: 400;
+  margin: 0 0 calc(var(--item-gap) * 2.4);
+  padding-top: calc(var(--item-gap) * 1.6);
+  border-top: 1px solid var(--profile-rule);
+}
+
+/* 01 PROFILE with a heavy underline */
+.headNumbered {
+  margin-top: 0;
+  display: flex;
+  align-items: baseline;
+  gap: 0.55rem;
+  font-size: calc(var(--font-size-base) * 0.95);
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin: 0 0 calc(var(--item-gap) * 3);
+  padding-bottom: calc(var(--item-gap) * 1.2);
+  border-bottom: 2px solid var(--profile-accent);
+  align-self: start;
+}
+
+/* The numbered rule spans the column. */
+.page[data-heading='numbered'] .headNumbered {
+  width: 100%;
+}
+
+.headNumber {
+  font-weight: 800;
+}
+
+/* ---------- Entry blocks ---------- */
+
+.entryStack {
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--item-gap) * 3.4);
+}
+
+.entry {
+  min-width: 0;
+}
+
+.entryTitle {
+  font-size: calc(var(--font-size-base) * 0.98);
+  font-weight: 700;
+  line-height: 1.32;
+  margin: 0;
+}
+
+.entryMeta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+  font-size: calc(var(--font-size-base) * 0.78);
+  color: var(--profile-soft);
+  margin: 0.12rem 0 0.4rem;
+}
+
+.dates {
+  font-size: calc(var(--font-size-base) * 0.78);
+  color: var(--profile-soft);
+  font-variant-numeric: tabular-nums;
+}
+
+.entryLocation {
+  font-style: italic;
+}
+
+.entryColumns {
+  display: grid;
+  grid-template-columns: minmax(0, 21fr) minmax(0, 79fr);
+  column-gap: 1.1rem;
+  min-width: 0;
+}
+
+.entryDateColumn {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+  padding-top: 0.08rem;
+}
+
+.entryDateColumn .entryLocation {
+  font-size: calc(var(--font-size-base) * 0.74);
+  color: var(--profile-soft);
+}
+
+.entryBody {
+  min-width: 0;
+}
+
+.body {
+  font-size: calc(var(--font-size-base) * 0.92);
+  line-height: 1.42;
+  color: var(--profile-body);
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+
+.entry ul,
+.entryColumns ul {
+  margin: calc(var(--item-gap) * 1.1) 0 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--item-gap) * 0.55);
+}
+
+.bullet {
+  color: var(--profile-soft);
+}
+
+/* ---------- Rail ---------- */
+
+.railBlock + .railBlock {
+  margin-top: calc(var(--item-gap) * 5);
+}
+
+.railLabel {
+  font-family: var(--header-font);
+  font-size: calc(var(--font-size-base) * 0.92);
+  font-weight: 700;
+  margin: 0 0 calc(var(--item-gap) * 2.2);
+}
+
+.railLabelPlain {
+  font-size: calc(var(--font-size-base) * 0.84);
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin: 0 0 calc(var(--item-gap) * 2.2);
+}
+
+.railText {
+  font-size: calc(var(--font-size-base) * 0.84);
+  line-height: 1.45;
+  color: var(--profile-body);
+  margin: 0;
+}
+
+/* ---------- Contact blocks ---------- */
+
+.contactStack {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  font-size: calc(var(--font-size-base) * 0.8);
+  color: var(--profile-body);
+}
+
+.contactRow {
+  display: flex;
+  flex-direction: column;
+  gap: 0.06rem;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.contactLabel {
+  font-weight: 700;
+  font-size: calc(var(--font-size-base) * 0.74);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--profile-soft);
+}
+
+.contactGrid {
+  display: grid;
+  grid-template-columns: minmax(0, 4.6rem) minmax(0, 1fr);
+  column-gap: 1.1rem;
+  row-gap: 0.5rem;
+  margin: 0;
+  font-size: calc(var(--font-size-base) * 0.84);
+}
+
+.contactTerm {
+  font-weight: 700;
+  color: var(--profile-ink);
+}
+
+.contactValue {
+  margin: 0;
+  color: var(--profile-body);
+  overflow-wrap: anywhere;
+}
+
+/* A plain-header layout prints the contact block under the name. */
+.inlineContacts {
+  margin: calc(var(--item-gap) * -2) 0 calc(var(--section-gap) * 0.9);
+}
+
+.inlineContacts .contactStack {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: 1.5rem;
+  row-gap: 0.4rem;
+}
+
+/* ---------- Skills ---------- */
+
+.skillList {
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--item-gap) * 1.9);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  min-width: 0;
+}
+
+.skillTwoCol {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: 1.6rem;
+  row-gap: calc(var(--item-gap) * 2.2);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  min-width: 0;
+}
+
+.skillItem {
+  font-size: calc(var(--font-size-base) * 0.84);
+  line-height: 1.35;
+  color: var(--profile-body);
+  overflow-wrap: anywhere;
+}
+
+/* A hairline under the name — a rule, not a level track. */
+.skillBar {
+  font-size: calc(var(--font-size-base) * 0.84);
+  line-height: 1.35;
+  color: var(--profile-body);
+  padding-bottom: 0.14rem;
+  border-bottom: 1px solid var(--profile-rule);
+  overflow-wrap: anywhere;
+}
+
+/* Inverted palette for the dark rail. */
+.layout-night-rail .railLabel,
+.layout-night-rail .railLabelPlain,
+.layout-night-rail .railText,
+.layout-night-rail .contactLabel,
+.layout-night-rail .contactValue {
+  color: var(--profile-on-surface);
+}
+
+.layout-night-rail .contactLabel {
+  opacity: 0.72;
+}
+
+.layout-night-rail .skillBar {
+  color: var(--profile-on-surface);
+  border-bottom-color: rgba(255, 255, 255, 0.55);
+}
+
+.layout-night-rail .contactStack {
+  color: var(--profile-on-surface);
+}
+
+/* ---------- Empty state ---------- */
+
+.emptyHint {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: calc(var(--font-size-base) * 0.8);
+  color: var(--profile-soft);
+  margin: 0;
+}
+
+/* Older roles collapse to one line each, matching the other templates. */
+.condensed {
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--item-gap) * 0.8);
+  margin-top: calc(var(--item-gap) * 1.2);
+}
+
+.condensedLabel {
+  font-size: calc(var(--font-size-base) * 0.76);
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--profile-soft);
+  margin: 0;
+}
+
+.condensedLine {
+  font-size: calc(var(--font-size-base) * 0.84);
+  line-height: 1.35;
+  color: var(--profile-body);
+}
+
+/* ---------- Second wave of shells: divider rail, panels, photo panel ---------- */
+
+/* A left rail closed by a vertical hairline instead of a filled column. */
+.layout-rail-divider .columns {
+  grid-template-columns: minmax(0, 31fr) minmax(0, 69fr);
+  column-gap: 0;
+}
+
+.layout-rail-divider .rail {
+  grid-column: 1;
+  grid-row: 1;
+  padding: 0 1.5rem 0 0;
+  border-left: 0;
+  border-right: 1px solid var(--profile-rule);
+}
+
+.layout-rail-divider .story {
+  grid-column: 2;
+  padding-left: 1.6rem;
+}
+
+/* Right column of filled panels. */
+.layout-panel-right .columns {
+  grid-template-columns: minmax(0, 65fr) minmax(0, 35fr);
+  column-gap: 1.5rem;
+}
+
+.layout-panel-right .rail {
+  border-left: 0;
+  padding-left: 0;
+}
+
+.layout-panel-right .railBlock {
+  background-color: var(--profile-surface);
+  padding: 0.85rem 0.95rem 0.75rem;
+}
+
+.layout-panel-right .railLabel {
+  color: var(--profile-accent);
+  font-size: calc(var(--font-size-base) * 1.25);
+}
+
+/* Right column that opens with a full-bleed portrait. */
+.layout-photo-panel .columns {
+  grid-template-columns: minmax(0, 67fr) minmax(0, 33fr);
+  column-gap: 1.7rem;
+}
+
+.layout-photo-panel .rail {
+  border-left: 0;
+  padding: 0 1rem 1rem;
+  background-color: var(--profile-surface);
+}
+
+.panelPhoto {
+  width: calc(100% + 2rem);
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  object-position: center top;
+  margin: 0 -1rem 1.1rem;
+}
+
+/* ---------- Identity: inline / display / boxed / centred portrait ---------- */
+
+.page[data-header='inline'] .name {
+  font-size: calc(var(--font-size-base) * 2.05 * var(--profile-name-scale));
+}
+
+.page[data-header='display'] .name {
+  font-size: calc(var(--font-size-base) * 2.45 * var(--profile-name-scale));
+  font-weight: 800;
+  line-height: 0.98;
+  letter-spacing: -0.02em;
+}
+
+.nameItalic {
+  font-style: italic;
+}
+
+.nameAccent {
+  color: var(--profile-accent);
+}
+
+.page[data-header='display'] .identity {
+  display: block;
+  padding-bottom: calc(var(--item-gap) * 2.4);
+  border-bottom: 1px solid var(--profile-rule);
+}
+
+.page[data-header='inline'] .identity {
+  align-items: center;
+}
+
+.page[data-header='centered'] .identity,
+.page[data-header='centered-photo'] .identity {
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.page[data-header='centered'] .contactInline,
+.page[data-header='centered-photo'] .contactInline {
+  justify-content: center;
+}
+
+/* The portrait sits above a centred name when the header stacks. */
+.page[data-header='centered-photo'] .portrait {
+  width: 3.1rem;
+  height: 3.1rem;
+}
+
+.page[data-header='centered-photo'] .name {
+  font-size: calc(var(--font-size-base) * 1.95);
+  letter-spacing: 0.02em;
+}
+
+/* Boxed name and role. */
+.page[data-header='boxed'] .identity {
+  display: block;
+}
+
+.nameBox {
+  max-width: 72%;
+  margin: 0 auto;
+  padding: calc(var(--item-gap) * 4.4) 1.2rem;
+  border: 1.5px solid var(--profile-ink);
+  text-align: center;
+}
+
+.page[data-header='boxed'] .name {
+  font-size: calc(var(--font-size-base) * 1.5);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+.page[data-header='boxed'] .role {
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-size: calc(var(--font-size-base) * 0.76);
+}
+
+/* ---------- Identity: dark band ---------- */
+
+.bandNight {
+  flex-direction: column;
+  align-items: center;
+  gap: 0.15rem;
+  padding: 1.5rem 1.2rem 0;
+  text-align: center;
+}
+
+.bandNight .bandPortrait {
+  width: 3.5rem;
+  height: 3.5rem;
+}
+
+.bandNight .bandText {
+  text-align: center;
+}
+
+.bandNight .bandName {
+  font-family: var(--header-font);
+  font-size: calc(var(--font-size-base) * 2.05);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  text-transform: none;
+}
+
+.bandNight .bandRole {
+  margin-top: 0.3rem;
+  font-size: calc(var(--font-size-base) * 0.74);
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+
+.bandNight .bandContacts {
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.4rem 1.1rem;
+  max-width: none;
+  width: calc(100% + 2.4rem);
+  margin: 0.95rem -1.2rem 0;
+  padding: 0.5rem 1.2rem;
+  font-size: calc(var(--font-size-base) * 0.76);
+  background-color: rgba(0, 0, 0, 0.32);
+}
+
+/* ---------- Section headings: second wave ---------- */
+
+/* Icon beside a bold sentence-case label. */
+.headIconPlain {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: calc(var(--font-size-base) * 1.02);
+  font-weight: 700;
+  margin: 0 0 calc(var(--item-gap) * 2.6);
+  line-height: 1.3;
+}
+
+/* Icon beside letterspaced caps. */
+.headIconCaps {
+  display: flex;
+  align-items: center;
+  gap: 0.42rem;
+  font-family: var(--header-font);
+  font-size: calc(var(--font-size-base) * 0.82);
+  font-weight: 700;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  margin: 0 0 calc(var(--item-gap) * 2.4);
+}
+
+/* Uppercase label on a full-width hairline. */
+.headUnderline {
+  font-size: calc(var(--font-size-base) * 0.8);
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  margin: 0 0 calc(var(--item-gap) * 2.4);
+  padding-bottom: calc(var(--item-gap) * 1.1);
+  border-bottom: 1px solid var(--profile-ink);
+}
+
+/* Oversized accent label, no rule. */
+.headDisplay {
+  font-family: var(--header-font);
+  font-size: calc(var(--font-size-base) * 1.45);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--profile-accent);
+  margin: 0 0 calc(var(--item-gap) * 2);
+}
+
+/* Letterspaced serif caps, no rule. */
+.headTracked {
+  font-family: var(--header-font);
+  font-size: calc(var(--font-size-base) * 0.9);
+  font-weight: 400;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  margin: 0 0 calc(var(--item-gap) * 2.2);
+}
+
+/* ---------- Entries: title-right and the timeline spine ---------- */
+
+.entryHeadRow {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.entryHeadRow .entryTitle {
+  flex: 1 1 auto;
+}
+
+.entryHeadRow .entryLocation {
+  flex-shrink: 0;
+  font-style: normal;
+  font-size: calc(var(--font-size-base) * 0.78);
+  color: var(--profile-soft);
+}
+
+/* A filled bar behind the role title. */
+.entryTitleBar {
+  display: inline-block;
+  background-color: var(--profile-accent);
+  color: #ffffff;
+  padding: 0.12rem 0.4rem 0.1rem;
+}
+
+.page[data-entry='timeline'] .entryStack {
+  position: relative;
+  margin-left: 0.3rem;
+  padding-left: 1.15rem;
+  border-left: 1px solid var(--profile-rule);
+}
+
+.page[data-entry='timeline'] .entry {
+  position: relative;
+}
+
+.page[data-entry='timeline'] .entry::before {
+  content: '';
+  position: absolute;
+  left: -1.53rem;
+  top: 0.4rem;
+  width: 0.36rem;
+  height: 0.36rem;
+  border: 1px solid var(--profile-ink);
+  border-radius: 999px;
+  background-color: #ffffff;
+}
+
+/* ---------- Skills: ruled and rule-separated ---------- */
+
+/* A rule in the accent colour under each name. */
+.skillRuled {
+  font-size: calc(var(--font-size-base) * 0.84);
+  line-height: 1.35;
+  color: var(--profile-body);
+  padding-bottom: 0.3rem;
+  border-bottom: 1px solid var(--profile-accent);
+  overflow-wrap: anywhere;
+}
+
+/* A neutral rule under each name. */
+.skillRuleSep {
+  font-size: calc(var(--font-size-base) * 0.84);
+  line-height: 1.35;
+  color: var(--profile-body);
+  padding-bottom: 0.3rem;
+  border-bottom: 1px solid var(--profile-rule);
+  overflow-wrap: anywhere;
+}
+

@@ -15,6 +15,12 @@ import { PageContainer } from './page-container';
 import { usePagination } from './use-pagination';
 import { PAGE_DIMENSIONS, mmToPx, getContentAreaPx } from '@/lib/constants/page-dimensions';
 import { useTranslations } from '@/lib/i18n';
+import { makeTranslator } from '@/lib/i18n/translate';
+import {
+  documentAdditionalLabels,
+  documentFallbackLabels,
+  documentSectionHeadings,
+} from '@/lib/i18n/document-labels';
 import { useLanguage } from '@/lib/context/language-context';
 
 interface PaginatedPreviewProps {
@@ -36,6 +42,8 @@ export function PaginatedPreview({ resumeData, settings }: PaginatedPreviewProps
   const { t } = useTranslations();
   // Orders the CJK font fallback so the preview matches the generated PDF.
   const { contentLanguage } = useLanguage();
+  // Document strings follow the output language, not the UI language.
+  const docT = React.useMemo(() => makeTranslator(contentLanguage), [contentLanguage]);
   const measurementRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const [zoom, setZoom] = useState(DEFAULT_ZOOM);
@@ -47,35 +55,14 @@ export function PaginatedPreview({ resumeData, settings }: PaginatedPreviewProps
   };
 
   const additionalSectionLabels = React.useMemo(
-    () => ({
-      technicalSkills: t('resume.additionalLabels.technicalSkills'),
-      languages: t('resume.additionalLabels.languages'),
-      certifications: t('resume.additionalLabels.certifications'),
-      awards: t('resume.additionalLabels.awards'),
-    }),
-    [t]
+    () => documentAdditionalLabels(docT),
+    [docT]
   );
-  const sectionHeadings = React.useMemo(
-    () => ({
-      summary: t('resume.sections.summary'),
-      experience: t('resume.sections.experience'),
-      education: t('resume.sections.education'),
-      projects: t('resume.sections.projects'),
-      certifications: t('resume.sections.certifications'),
-      skills: t('resume.sections.skillsOnly'),
-      languages: t('resume.sections.languages'),
-      awards: t('resume.sections.awards'),
-      links: t('resume.sections.links'),
-      earlierExperience: t('resume.sections.earlierExperience'),
-    }),
-    [t]
-  );
-  const fallbackLabels = React.useMemo(
-    () => ({
-      name: t('resume.defaults.name'),
-    }),
-    [t]
-  );
+  const sectionHeadings = React.useMemo(() => documentSectionHeadings(docT), [docT]);
+  // Every label the document prints, not just the name: the photo templates render a
+  // labelled contact block, and a partial set used to leave "Details / Phone / Email"
+  // in English on the preview while the PDF was translated.
+  const fallbackLabels = React.useMemo(() => documentFallbackLabels(docT), [docT]);
 
   const { pages, isCalculating } = usePagination({
     pageSize: settings.pageSize,

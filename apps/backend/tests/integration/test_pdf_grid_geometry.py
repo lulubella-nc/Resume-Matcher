@@ -22,6 +22,8 @@ TEMPLATE_STYLES = (
     "swiss-two-column.module.css",
     "modern-two-column.module.css",
     "deedy.module.css",
+    "photo-sidebar.module.css",
+    "editorial.module.css",
 )
 PAGE_WIDTH_MM = {"A4": 210.0, "Letter": 215.9}
 

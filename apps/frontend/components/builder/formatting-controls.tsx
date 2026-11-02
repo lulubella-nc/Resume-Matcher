@@ -13,8 +13,11 @@ import {
   type HeaderFontFamily,
   type BodyFontFamily,
   type AccentColor,
+  type PhotoShape,
+  type PhotoSizeLevel,
   DEFAULT_TEMPLATE_SETTINGS,
   applyTemplatePreset,
+  isPhotoTemplate,
   SECTION_SPACING_MAP,
   ITEM_SPACING_MAP,
   LINE_HEIGHT_MAP,
@@ -24,9 +27,10 @@ import {
   COMPACT_LINE_HEIGHT_MULTIPLIER,
   TEMPLATE_OPTIONS,
   PAGE_SIZE_INFO,
-  ACCENT_COLOR_MAP,
 } from '@/lib/types/template-settings';
 import { TemplateThumbnail } from './template-selector';
+import { AccentColorPicker } from './accent-color-picker';
+import { templateLabels as buildTemplateLabels } from '@/lib/i18n/template-labels';
 import { useTranslations } from '@/lib/i18n';
 
 interface FormattingControlsProps {
@@ -119,55 +123,23 @@ export const FormattingControls: React.FC<FormattingControlsProps> = ({ settings
     onChange({ ...settings, accentColor });
   };
 
+  const handleShowPhotoToggle = (showPhoto: boolean) => {
+    onChange({ ...settings, showPhoto });
+  };
+
+  const handlePhotoShapeChange = (photoShape: PhotoShape) => {
+    onChange({ ...settings, photoShape });
+  };
+
+  const handlePhotoSizeChange = (photoSize: PhotoSizeLevel) => {
+    onChange({ ...settings, photoSize });
+  };
+
   const handleReset = () => {
     onChange(DEFAULT_TEMPLATE_SETTINGS);
   };
 
-  const templateLabels = React.useMemo(
-    () => ({
-      'swiss-single': {
-        name: t('builder.formatting.templates.swissSingle.name'),
-        description: t('builder.formatting.templates.swissSingle.description'),
-      },
-      'swiss-two-column': {
-        name: t('builder.formatting.templates.swissTwoColumn.name'),
-        description: t('builder.formatting.templates.swissTwoColumn.description'),
-      },
-      modern: {
-        name: t('builder.formatting.templates.modern.name'),
-        description: t('builder.formatting.templates.modern.description'),
-      },
-      'modern-two-column': {
-        name: t('builder.formatting.templates.modernTwoColumn.name'),
-        description: t('builder.formatting.templates.modernTwoColumn.description'),
-      },
-      latex: {
-        name: t('builder.formatting.templates.latex.name'),
-        description: t('builder.formatting.templates.latex.description'),
-      },
-      clean: {
-        name: t('builder.formatting.templates.clean.name'),
-        description: t('builder.formatting.templates.clean.description'),
-      },
-      vivid: {
-        name: t('builder.formatting.templates.vivid.name'),
-        description: t('builder.formatting.templates.vivid.description'),
-      },
-      'vivid-single': {
-        name: t('builder.formatting.templates.vividSingle.name'),
-        description: t('builder.formatting.templates.vividSingle.description'),
-      },
-      'modern-deedy': {
-        name: t('builder.formatting.templates.modernDeedy.name'),
-        description: t('builder.formatting.templates.modernDeedy.description'),
-      },
-      deedy: {
-        name: t('builder.formatting.templates.deedy.name'),
-        description: t('builder.formatting.templates.deedy.description'),
-      },
-    }),
-    [t]
-  );
+  const templateLabels = React.useMemo(() => buildTemplateLabels(t), [t]);
 
   const getFontLabel = (font: HeaderFontFamily | BodyFontFamily) => {
     if (font === 'sans-serif') return t('builder.formatting.fontNames.sans');
@@ -240,7 +212,9 @@ export const FormattingControls: React.FC<FormattingControlsProps> = ({ settings
           {(settings.template === 'modern' ||
             settings.template === 'modern-two-column' ||
             settings.template === 'vivid' ||
-            settings.template === 'vivid-single') && (
+            settings.template === 'vivid-single' ||
+            settings.template === 'photo-sidebar' ||
+            settings.template === 'editorial') && (
             <div>
               <h4
                 id={`${contentId}-accent`}
@@ -248,25 +222,72 @@ export const FormattingControls: React.FC<FormattingControlsProps> = ({ settings
               >
                 {t('builder.formatting.accentColor')}
               </h4>
-              <SegmentedControl
-                size="sm"
-                aria-labelledby={`${contentId}-accent`}
+              {/* Thirteen swatches: a segmented row wrapped past the panel edge, so this
+                  is a named grid that keeps the radiogroup keyboard contract. */}
+              <AccentColorPicker
                 value={settings.accentColor}
                 onChange={handleAccentColorChange}
-                items={(Object.keys(ACCENT_COLOR_MAP) as AccentColor[]).map((color) => ({
-                  value: color,
-                  label: (
-                    <span className="flex items-center gap-2">
-                      <span
-                        aria-hidden="true"
-                        className="size-4 border border-steel"
-                        style={{ backgroundColor: ACCENT_COLOR_MAP[color].primary }}
-                      />
-                      {t(`builder.formatting.accentColors.${color}`)}
-                    </span>
-                  ),
-                }))}
+                labelFor={(color) => t(`builder.formatting.accentColors.${color}`)}
+                labelledBy={`${contentId}-accent`}
               />
+            </div>
+          )}
+
+          {/* Photo Controls - Visible for photo templates */}
+          {isPhotoTemplate(settings.template) && (
+            <div>
+              <h4
+                id={`${contentId}-photo`}
+                className="font-mono text-xs font-bold uppercase tracking-wider mb-3 text-ink-soft"
+              >
+                {t('builder.formatting.photo.title')}
+              </h4>
+              <div className="space-y-3">
+                <ToggleSwitch
+                  variant="inline"
+                  label={t('builder.formatting.photo.show')}
+                  checked={settings.showPhoto}
+                  onCheckedChange={handleShowPhotoToggle}
+                />
+                <div className="flex items-center gap-2">
+                  <span
+                    id={`${contentId}-photo-shape`}
+                    className="font-mono text-xs w-16 text-ink-soft"
+                  >
+                    {t('builder.formatting.photo.shape')}:
+                  </span>
+                  <SegmentedControl
+                    size="sm"
+                    className="gap-1"
+                    aria-labelledby={`${contentId}-photo-shape`}
+                    value={settings.photoShape}
+                    onChange={(shape) => handlePhotoShapeChange(shape as PhotoShape)}
+                    items={(['circle', 'square'] as PhotoShape[]).map((shape) => ({
+                      value: shape,
+                      label: t(`builder.formatting.photo.shapes.${shape}`),
+                    }))}
+                  />
+                </div>
+                <div className="flex items-center gap-2">
+                  <span
+                    id={`${contentId}-photo-size`}
+                    className="font-mono text-xs w-16 text-ink-soft"
+                  >
+                    {t('builder.formatting.photo.size')}:
+                  </span>
+                  <SegmentedControl
+                    size="sm"
+                    className="gap-1"
+                    aria-labelledby={`${contentId}-photo-size`}
+                    value={String(settings.photoSize)}
+                    onChange={(size) => handlePhotoSizeChange(Number(size) as PhotoSizeLevel)}
+                    items={([1, 2, 3] as PhotoSizeLevel[]).map((size) => ({
+                      value: String(size),
+                      label: t(`builder.formatting.photo.sizes.${size}`),
+                    }))}
+                  />
+                </div>
+              </div>
             </div>
           )}
 

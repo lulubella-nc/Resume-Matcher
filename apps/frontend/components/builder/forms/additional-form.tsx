@@ -20,10 +20,7 @@ export const AdditionalForm: React.FC<AdditionalFormProps> = ({ data, onChange }
     // so pressing Enter creates a new line (issue #763); consumers filter empty
     // entries at render time, and the backend drops them on save.
     const items = value.split('\n');
-    onChange({
-      ...data,
-      [field]: items,
-    });
+    onChange({ ...data, [field]: items });
   };
 
   const formatArray = (arr?: string[]) => {

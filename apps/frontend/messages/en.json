@@ -483,6 +483,74 @@
         "deedy": {
           "name": "Deedy",
           "description": "Two-column layout with a hairline name, a narrow left column and light gray headings"
+        },
+        "photoSidebar": {
+          "name": "Photo Sidebar",
+          "description": "Colored rail with a portrait photo, contact details and skills beside your story"
+        },
+        "editorial": {
+          "name": "Editorial",
+          "description": "Airy two-column layout with gold serif headings, a round portrait and a plain skills list"
+        },
+        "railNotes": {
+          "name": "Rail Notes",
+          "description": "Right rail with a labelled contact block, icon section headings and ruled skills"
+        },
+        "labelChips": {
+          "name": "Label Chips",
+          "description": "Colour band behind the name, black chip labels and ruled skill columns"
+        },
+        "classicRules": {
+          "name": "Classic Rules",
+          "description": "Centred heading, letterspaced labels over rules and dates in their own column"
+        },
+        "numbered": {
+          "name": "Numbered",
+          "description": "Numbered sections with heavy rules and a label/value contact grid"
+        },
+        "nightRail": {
+          "name": "Night Rail",
+          "description": "Full-height navy rail with white ruled skills beside the story"
+        },
+        "bandRail": {
+          "name": "Band Rail",
+          "description": "Colour band header over a narrow rail of skills and languages"
+        },
+        "timeline": {
+          "name": "Timeline",
+          "description": "Centred portrait over the name, icon labels in caps and a spine hanging a node on every role"
+        },
+        "ruleRail": {
+          "name": "Rule Rail",
+          "description": "Oversized name over the role, a left rail closed by a vertical rule and ruled skills"
+        },
+        "serifRail": {
+          "name": "Serif Rail",
+          "description": "Serif name in accent beside a square portrait, letterspaced caps and a right rail of ruled skills"
+        },
+        "blueRail": {
+          "name": "Blue Rail",
+          "description": "Portrait beside the name, icon labels in sentence case and a light rule under every skill"
+        },
+        "nightBand": {
+          "name": "Night Band",
+          "description": "Dark band with a centred portrait, a serif name and a contact strip, then one reading column"
+        },
+        "framed": {
+          "name": "Framed",
+          "description": "Name and role inside a ruled box, uppercase headings on a full rule and a left rail"
+        },
+        "panels": {
+          "name": "Panels",
+          "description": "Display name beside the portrait, oversized section labels and grey panels down the right column"
+        },
+        "photoPanel": {
+          "name": "Photo Panel",
+          "description": "Tall portrait filling the head of a grey right column, italic display name beside it"
+        },
+        "atsClassic": {
+          "name": "ATS Classic",
+          "description": "Dense single column: centred name, uppercase headings on a rule, role and dates on the entry line"
         }
       },
       "accentColor": "Accent Color",
@@ -490,7 +558,16 @@
         "blue": "Blue",
         "green": "Green",
         "orange": "Orange",
-        "red": "Red"
+        "red": "Red",
+        "purple": "Purple",
+        "teal": "Teal",
+        "gold": "Gold",
+        "navy": "Navy",
+        "denim": "Denim",
+        "sage": "Sage",
+        "ash": "Ash",
+        "graphite": "Graphite",
+        "sand": "Sand"
       },
       "pageSize": "Page Size",
       "margins": "Margins (mm)",
@@ -527,7 +604,22 @@
       "effectiveHeaderFont": "Header Font",
       "effectiveBodyFont": "Body Font",
       "compactHint": "Compact mode tightens spacing and line height. Margins and base font size stay literal.",
-      "resetDefaults": "Reset to Defaults"
+      "resetDefaults": "Reset to Defaults",
+      "photo": {
+        "title": "Portrait",
+        "show": "Show photo",
+        "shape": "Shape",
+        "shapes": {
+          "circle": "Round",
+          "square": "Square"
+        },
+        "size": "Size",
+        "sizes": {
+          "1": "S",
+          "2": "M",
+          "3": "L"
+        }
+      }
     },
     "personalInfoForm": {
       "placeholders": {
@@ -539,6 +631,22 @@
         "website": "portfolio.com",
         "linkedin": "linkedin.com/in/john",
         "github": "github.com/john"
+      },
+      "photo": {
+        "label": "Photo",
+        "empty": "No photo",
+        "upload": "Upload photo",
+        "replace": "Replace",
+        "remove": "Remove",
+        "uploaded": "Uploaded photo (stored in this resume)",
+        "urlPlaceholder": "or paste an image link: https://…",
+        "hint": "JPG or PNG up to 12 MB. Shrunk to 512 px and stored inside the resume.",
+        "errors": {
+          "type": "That file is not an image.",
+          "size": "The image is larger than 12 MB.",
+          "decode": "The image could not be read. Try a JPG or PNG.",
+          "unsupported": "This browser could not process the image."
+        }
       }
     },
     "leftPanel": {
@@ -1268,6 +1376,15 @@
       "languages": "Languages:",
       "certifications": "Certifications:",
       "awards": "Awards:"
+    },
+    "contact": {
+      "details": "Details",
+      "address": "Address",
+      "phone": "Phone",
+      "email": "Email",
+      "website": "Website",
+      "linkedin": "LinkedIn",
+      "github": "GitHub"
     }
   },
   "coverLetter": {

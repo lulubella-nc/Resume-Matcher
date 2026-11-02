@@ -55,6 +55,7 @@ import { RegenerateWizard } from './regenerate-wizard';
 import { useRegenerateWizard } from '@/hooks/use-regenerate-wizard';
 import { useTranslations } from '@/lib/i18n';
 import { DEFAULT_TEMPLATE_SETTINGS, type TemplateSettings } from '@/lib/types/template-settings';
+import { makeTranslator } from '@/lib/i18n/translate';
 import { withLocalizedDefaultSections } from '@/lib/utils/section-helpers';
 import { useLanguage } from '@/lib/context/language-context';
 import { buildResumeFilename, downloadBlobAsFile, openUrlInNewTab } from '@/lib/utils/download';
@@ -226,7 +227,7 @@ interface ResumeBuilderProps {
 
 const ResumeBuilderContent = ({ agentMode = false }: ResumeBuilderProps) => {
   const { t } = useTranslations();
-  const { uiLanguage, contentLanguage } = useLanguage();
+  const { contentLanguage } = useLanguage();
   const [notificationDialog, setNotificationDialog] = useState<{
     title: string;
     description: string;
@@ -464,9 +465,12 @@ const ResumeBuilderContent = ({ agentMode = false }: ResumeBuilderProps) => {
     }
     return null;
   }, [canonicalResumeDataForPreview.additional?.technicalSkills, t]);
+  // Section headings are printed into the document, so they follow the output language
+  // (contentLanguage) rather than the language of the builder chrome.
+  const docT = useMemo(() => makeTranslator(contentLanguage), [contentLanguage]);
   const localizedResumeDataForPreview = useMemo(
-    () => withLocalizedDefaultSections(canonicalResumeDataForPreview, t),
-    [canonicalResumeDataForPreview, t]
+    () => withLocalizedDefaultSections(canonicalResumeDataForPreview, docT),
+    [canonicalResumeDataForPreview, docT]
   );
 
   // Warn user before leaving with unsaved changes
@@ -530,7 +534,28 @@ const ResumeBuilderContent = ({ agentMode = false }: ResumeBuilderProps) => {
           setIsTailoredResume(Boolean(data.parent_id));
           // Store resume title for downloads
           setResumeTitle(data.title ?? null);
-          setTemplateSettings(data.template_settings ?? DEFAULT_TEMPLATE_SETTINGS);
+          // Merge over the defaults: settings saved before a control existed (the
+          // photo controls, for one) would otherwise arrive with missing keys.
+          setTemplateSettings(
+            data.template_settings
+              ? {
+                  ...DEFAULT_TEMPLATE_SETTINGS,
+                  ...data.template_settings,
+                  margins: {
+                    ...DEFAULT_TEMPLATE_SETTINGS.margins,
+                    ...data.template_settings.margins,
+                  },
+                  spacing: {
+                    ...DEFAULT_TEMPLATE_SETTINGS.spacing,
+                    ...data.template_settings.spacing,
+                  },
+                  fontSize: {
+                    ...DEFAULT_TEMPLATE_SETTINGS.fontSize,
+                    ...data.template_settings.fontSize,
+                  },
+                }
+              : DEFAULT_TEMPLATE_SETTINGS
+          );
           setFormattingSaveFailed(false);
           // These values belong to this resume. Explicitly applying empty values
           // prevents the preceding document's attachment from surviving a switch.
@@ -1295,7 +1320,7 @@ const ResumeBuilderContent = ({ agentMode = false }: ResumeBuilderProps) => {
     }
     try {
       setIsDownloading(true);
-      const blob = await downloadResumePdf(resumeId, templateSettings, uiLanguage);
+      const blob = await downloadResumePdf(resumeId, templateSettings, contentLanguage);
       const company = getCompanyFromTitle(resumeTitle);
       const userName = resumeData.personalInfo?.name?.trim() || null;
       const filename = buildResumeFilename(userName, company, resumeId, 'resume');
@@ -1304,7 +1329,7 @@ const ResumeBuilderContent = ({ agentMode = false }: ResumeBuilderProps) => {
     } catch (error) {
       console.error('Failed to download resume:', error);
       if (error instanceof TypeError && error.message.includes('Failed to fetch')) {
-        const fallbackUrl = getResumePdfUrl(resumeId, templateSettings, uiLanguage);
+        const fallbackUrl = getResumePdfUrl(resumeId, templateSettings, contentLanguage);
         const didOpen = openUrlInNewTab(fallbackUrl);
         if (!didOpen) {
           showNotification(t('common.popupBlocked', { url: fallbackUrl }), 'warning');
@@ -1434,7 +1459,7 @@ const ResumeBuilderContent = ({ agentMode = false }: ResumeBuilderProps) => {
       if (!(await flushCoverLetterForExport())) {
         return;
       }
-      const blob = await downloadCoverLetterPdf(resumeId, templateSettings.pageSize, uiLanguage);
+      const blob = await downloadCoverLetterPdf(resumeId, templateSettings.pageSize, contentLanguage);
       const company = getCompanyFromTitle(resumeTitle);
       const userName = resumeData.personalInfo?.name?.trim() || null;
       const filename = buildResumeFilename(userName, company, resumeId, 'cover-letter');
@@ -1442,7 +1467,7 @@ const ResumeBuilderContent = ({ agentMode = false }: ResumeBuilderProps) => {
     } catch (error) {
       console.error('Failed to download cover letter:', error);
       if (error instanceof TypeError && error.message.includes('Failed to fetch')) {
-        const fallbackUrl = getCoverLetterPdfUrl(resumeId, templateSettings.pageSize, uiLanguage);
+        const fallbackUrl = getCoverLetterPdfUrl(resumeId, templateSettings.pageSize, contentLanguage);
         const didOpen = openUrlInNewTab(fallbackUrl);
         if (!didOpen) {
           showNotification(t('common.popupBlocked', { url: fallbackUrl }), 'warning');
@@ -2182,7 +2207,7 @@ const ResumeBuilderContent = ({ agentMode = false }: ResumeBuilderProps) => {
                 <AtsCheckView
                   resumeId={resumeId}
                   settings={templateSettings}
-                  locale={uiLanguage}
+                  locale={contentLanguage}
                   hasUnsavedChanges={hasUnsavedChanges}
                 />
               )}

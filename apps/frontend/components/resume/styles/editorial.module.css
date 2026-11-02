@@ -1,0 +1,324 @@
+@import './_tokens.css';
+
+/*
+  Editorial Template
+  ID: editorial
+
+  Translated from the "portrait + gold headings" reference design: a narrow left
+  rail (round portrait, labelled contact block, dot-rated skills) beside a wide
+  story column (name, profile, experience, education, references). No rules, no
+  fills — the only colour is the accent on section headings, and the rhythm comes
+  from whitespace rather than lines.
+
+  Layout notes:
+  - The rail is 27fr and the story 73fr, matching the reference's 200:542 split.
+  - The story column comes first in the DOM so an ATS reads profile → experience
+    before the rail; the grid places the rail in column 1 regardless.
+  - CJK: the section headings use --header-font (serif by default). Chinese and
+    Japanese have no serif gold equivalent that matches Latin glyph weights, so
+    the same family is kept for consistency rather than switching face per locale.
+  - PDF text layer: no opacity on text, no text-transform, no letter-spacing on
+    body copy, so Chromium emits one glyph per character.
+*/
+
+.grid {
+  /* Warm near-black and a muted grey, so the accent reads as the only colour. */
+  --editorial-ink: #1b1813;
+  --editorial-body: #33302a;
+  --editorial-soft: #7d766a;
+
+  display: grid;
+  grid-template-columns: minmax(0, 27fr) minmax(0, 73fr);
+  column-gap: 1.9rem;
+  align-items: start;
+  min-width: 0;
+}
+
+/* Narrow rail: portrait, contact block, skills. */
+.rail {
+  grid-column: 1;
+  grid-row: 1;
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--section-gap) * 1.8);
+  min-width: 0;
+}
+
+/* Story column: name, profile, experience. */
+.main {
+  grid-column: 2;
+  grid-row: 1;
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--section-gap) * 2.05);
+  min-width: 0;
+}
+
+/* ---------- Identity ---------- */
+
+.identity {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  margin: calc(var(--item-gap) * 0.5) 0 0;
+}
+
+.name {
+  font-family: var(--body-font);
+  font-size: calc(var(--font-size-base) * var(--header-scale) * 1.42);
+  font-weight: 500;
+  line-height: 1.06;
+  letter-spacing: -0.012em;
+  color: var(--editorial-ink);
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+
+.jobTitle {
+  font-size: calc(var(--font-size-base) * 0.95);
+  line-height: 1.35;
+  color: var(--editorial-soft);
+  margin: 0;
+}
+
+/* ---------- Section headings ---------- */
+
+.title {
+  font-family: var(--header-font);
+  font-size: calc(var(--font-size-base) * var(--section-header-scale) * 1.48);
+  font-weight: 400;
+  line-height: 1.18;
+  letter-spacing: 0.004em;
+  color: var(--resume-accent-primary);
+  margin: 0 0 calc(var(--item-gap) * 3.1);
+  break-after: avoid;
+  page-break-after: avoid;
+  orphans: 3;
+  widows: 3;
+}
+
+/* ---------- Portrait ---------- */
+
+.portrait {
+  display: flex;
+  margin-bottom: calc(var(--section-gap) * 0.55);
+}
+
+.photo,
+.monogram {
+  width: var(--resume-photo-size, 96px);
+  height: var(--resume-photo-size, 96px);
+  flex-shrink: 0;
+  display: block;
+}
+
+.photo {
+  object-fit: cover;
+  object-position: center;
+  background-color: var(--resume-accent-light);
+}
+
+.monogram {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--resume-accent-light);
+  font-family: var(--header-font);
+  font-size: calc(var(--resume-photo-size, 96px) * 0.36);
+  font-weight: 500;
+  line-height: 1;
+  color: var(--resume-accent-primary);
+}
+
+.photo[data-photo-shape='circle'],
+.monogram[data-photo-shape='circle'] {
+  border-radius: 999px;
+}
+
+.photo[data-photo-shape='square'],
+.monogram[data-photo-shape='square'] {
+  border-radius: 4px;
+}
+
+/* ---------- Rail: labelled contact block ---------- */
+
+.contactList {
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--item-gap) * 3);
+  min-width: 0;
+}
+
+.contact {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  min-width: 0;
+}
+
+.contactLabel {
+  font-size: calc(var(--font-size-base) * 0.86);
+  font-weight: 700;
+  line-height: 1.3;
+  color: var(--editorial-ink);
+}
+
+.contactValue {
+  font-size: calc(var(--font-size-base) * 0.86);
+  line-height: 1.45;
+  color: var(--editorial-soft);
+  /* A location saved as several lines ("540 Apoxy Court\nNew York") keeps them. */
+  white-space: pre-line;
+  overflow-wrap: anywhere;
+}
+
+.contactValue a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* ---------- Rail: skills ---------- */
+
+.skillList {
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--item-gap) * 3.3);
+  min-width: 0;
+}
+
+/* Names only: no proficiency scale, because a scale would state a level the
+   resume never claimed. */
+.skillName {
+  font-size: calc(var(--font-size-base) * 0.9);
+  font-weight: 700;
+  line-height: 1.35;
+  color: var(--editorial-ink);
+  overflow-wrap: anywhere;
+  margin: 0;
+}
+
+/* Language names sit under the skills as a quiet list. */
+.railText {
+  font-size: calc(var(--font-size-base) * 0.86);
+  line-height: 1.5;
+  color: var(--editorial-soft);
+  margin: 0;
+}
+
+/* ---------- Story column: entries ---------- */
+
+.entryStack {
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--item-gap) * 3.6);
+  min-width: 0;
+}
+
+.entry {
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--item-gap) * 0.9);
+  min-width: 0;
+  break-inside: avoid;
+  page-break-inside: avoid;
+}
+
+/* Bullets hang a little further in than the shared list default, matching the
+   reference's indent under an entry title. */
+.entry ul {
+  margin-left: 1.45rem;
+}
+
+.entryTitle {
+  font-size: calc(var(--font-size-base) * 1.05);
+  font-weight: 700;
+  line-height: 1.35;
+  color: var(--editorial-ink);
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+
+.meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.15rem 0.9rem;
+  font-size: calc(var(--font-size-base) * 0.82);
+  line-height: 1.4;
+  color: var(--editorial-soft);
+}
+
+.metaLocation {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  min-width: 0;
+}
+
+.metaIcon {
+  flex-shrink: 0;
+  margin-top: 0.05em;
+}
+
+/* Body copy: left aligned (the reference is ragged right, not justified). */
+.body {
+  font-size: var(--font-size-base);
+  line-height: 1.6;
+  color: var(--editorial-body);
+  margin: 0;
+}
+
+.bullet {
+  color: var(--editorial-ink);
+  font-size: 1em;
+  line-height: 1.6;
+  margin-right: 0.35rem;
+  flex-shrink: 0;
+}
+
+/* Plain lists (certifications, awards, references). */
+.plainList {
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--item-gap) * 1.6);
+  font-size: var(--font-size-base);
+  line-height: 1.55;
+  color: var(--editorial-body);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.plainItem {
+  display: flex;
+  min-width: 0;
+}
+
+/* Condensed old roles: one quiet line each. */
+.condensed {
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--item-gap) * 1.2);
+  min-width: 0;
+}
+
+.condensedLabel {
+  font-size: calc(var(--font-size-base) * 0.9);
+  font-weight: 700;
+  color: var(--editorial-ink);
+  margin: 0;
+}
+
+.condensedLine {
+  font-size: calc(var(--font-size-base) * 0.86);
+  line-height: 1.5;
+  color: var(--editorial-soft);
+}
+
+/* Links inside entries (project repos) stay quiet: underlined, ink coloured. */
+.link {
+  color: var(--editorial-ink);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  overflow-wrap: anywhere;
+}

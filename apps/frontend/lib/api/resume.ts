@@ -85,6 +85,9 @@ export interface PageFitSettings {
   compactMode: boolean;
   showContactIcons: boolean;
   accentColor: string;
+  showPhoto?: boolean;
+  photoShape?: string;
+  photoSize?: number;
   lang?: string;
 }
 
@@ -123,6 +126,9 @@ export function toPageFitSettings(settings: TemplateSettings, locale?: string): 
     compactMode: settings.compactMode,
     showContactIcons: settings.showContactIcons,
     accentColor: settings.accentColor,
+    showPhoto: settings.showPhoto,
+    photoShape: settings.photoShape,
+    photoSize: settings.photoSize,
     ...(locale ? { lang: locale } : {}),
   };
 }
@@ -370,6 +376,9 @@ export function getResumePdfUrl(
     params.set('compactMode', String(settings.compactMode));
     params.set('showContactIcons', String(settings.showContactIcons));
     params.set('accentColor', settings.accentColor);
+    params.set('showPhoto', String(settings.showPhoto));
+    params.set('photoShape', settings.photoShape);
+    params.set('photoSize', String(settings.photoSize));
   } else {
     params.set('template', 'swiss-single');
     params.set('pageSize', 'A4');

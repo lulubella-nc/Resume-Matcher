@@ -7,10 +7,19 @@ import {
   type HeaderFontFamily,
   type BodyFontFamily,
   type AccentColor,
+  type PhotoShape,
+  type PhotoSizeLevel,
+  ACCENT_COLOR_MAP,
   DEFAULT_TEMPLATE_SETTINGS,
+  TEMPLATE_OPTIONS,
 } from '@/lib/types/template-settings';
 import { API_BASE } from '@/lib/api/client';
 import { translate } from '@/lib/i18n/server';
+import {
+  documentAdditionalLabels,
+  documentFallbackLabels,
+  documentSectionHeadings,
+} from '@/lib/i18n/document-labels';
 import { resolveLocale } from '@/lib/i18n/locale';
 import { withLocalizedDefaultSections } from '@/lib/utils/section-helpers';
 import { runningHeaderCss } from '@/lib/print/running-header';
@@ -34,6 +43,9 @@ type PageProps = {
     compactMode?: string;
     showContactIcons?: string;
     accentColor?: string;
+    showPhoto?: string;
+    photoShape?: string;
+    photoSize?: string;
     lang?: string;
     draft?: string;
   }>;
@@ -61,12 +73,34 @@ function parseBodyFont(value: string | undefined): BodyFontFamily {
 
 /**
  * Parse accent color
+ *
+ * Membership is read from ACCENT_COLOR_MAP rather than a hand-written chain, so a new
+ * swatch can never be accepted by the picker and then silently dropped by the PDF route.
  */
 function parseAccentColor(value: string | undefined): AccentColor {
-  if (value === 'blue' || value === 'green' || value === 'orange' || value === 'red') {
-    return value;
+  if (value && Object.prototype.hasOwnProperty.call(ACCENT_COLOR_MAP, value)) {
+    return value as AccentColor;
   }
   return DEFAULT_TEMPLATE_SETTINGS.accentColor;
+}
+
+/**
+ * Parse photo shape
+ */
+function parsePhotoShape(value: string | undefined): PhotoShape {
+  if (value === 'circle' || value === 'square') {
+    return value;
+  }
+  return DEFAULT_TEMPLATE_SETTINGS.photoShape;
+}
+
+/**
+ * Parse photo size level (1-3)
+ */
+function parsePhotoSize(value: string | undefined): PhotoSizeLevel {
+  const parsed = parseInt(value ?? '', 10);
+  if (parsed === 1 || parsed === 2 || parsed === 3) return parsed;
+  return DEFAULT_TEMPLATE_SETTINGS.photoSize;
 }
 
 /**
@@ -133,22 +167,14 @@ function parseMargin(value: string | undefined, defaultValue: number): number {
 /**
  * Validate template type
  */
+const TEMPLATE_IDS: ReadonlySet<string> = new Set(
+  TEMPLATE_OPTIONS.map((option) => option.id as string)
+);
+
 function parseTemplate(value: string | undefined): TemplateType {
-  // Allow-list mirrors TEMPLATE_OPTIONS in lib/types/template-settings.ts — keep in sync.
-  if (
-    value === 'swiss-single' ||
-    value === 'swiss-two-column' ||
-    value === 'modern' ||
-    value === 'modern-two-column' ||
-    value === 'latex' ||
-    value === 'clean' ||
-    value === 'vivid' ||
-    value === 'vivid-single' ||
-    value === 'modern-deedy' ||
-    value === 'deedy'
-  ) {
-    return value;
-  }
+  // Derived from TEMPLATE_OPTIONS so a newly registered template can never be
+  // silently rejected here and fall back to swiss-single in the PDF.
+  if (value && TEMPLATE_IDS.has(value)) return value as TemplateType;
   return 'swiss-single';
 }
 
@@ -186,27 +212,9 @@ export default async function PrintResumePage({ params, searchParams }: PageProp
   const t = (key: string, params?: Record<string, string | number>) =>
     translate(locale, key, params);
   const localizedResumeData = withLocalizedDefaultSections(resumeData, t);
-  const additionalSectionLabels = {
-    technicalSkills: t('resume.additionalLabels.technicalSkills'),
-    languages: t('resume.additionalLabels.languages'),
-    certifications: t('resume.additionalLabels.certifications'),
-    awards: t('resume.additionalLabels.awards'),
-  };
-  const sectionHeadings = {
-    summary: t('resume.sections.summary'),
-    experience: t('resume.sections.experience'),
-    education: t('resume.sections.education'),
-    projects: t('resume.sections.projects'),
-    certifications: t('resume.sections.certifications'),
-    skills: t('resume.sections.skillsOnly'),
-    languages: t('resume.sections.languages'),
-    awards: t('resume.sections.awards'),
-    links: t('resume.sections.links'),
-    earlierExperience: t('resume.sections.earlierExperience'),
-  };
-  const fallbackLabels = {
-    name: t('resume.defaults.name'),
-  };
+  const additionalSectionLabels = documentAdditionalLabels(t);
+  const sectionHeadings = documentSectionHeadings(t);
+  const fallbackLabels = documentFallbackLabels(t);
 
   // Parse template settings from query params
   const settings: TemplateSettings = {
@@ -259,6 +267,9 @@ export default async function PrintResumePage({ params, searchParams }: PageProp
       DEFAULT_TEMPLATE_SETTINGS.showContactIcons
     ),
     accentColor: parseAccentColor(resolvedSearchParams?.accentColor),
+    showPhoto: parseBoolean(resolvedSearchParams?.showPhoto, DEFAULT_TEMPLATE_SETTINGS.showPhoto),
+    photoShape: parsePhotoShape(resolvedSearchParams?.photoShape),
+    photoSize: parsePhotoSize(resolvedSearchParams?.photoSize),
   };
 
   // Note: Margins are applied by Playwright's PDF renderer (not here)

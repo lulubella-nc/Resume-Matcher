@@ -23,6 +23,10 @@ VIVID: dict[str, Any] = {
     "compactMode": True,
     "showContactIcons": True,
     "accentColor": "orange",
+    # Photo controls: omitted in the PATCH, filled with their defaults on the way out.
+    "showPhoto": True,
+    "photoShape": "circle",
+    "photoSize": 2,
     "session": "tab-1",
     "revision": 3,
 }

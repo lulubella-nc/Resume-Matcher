@@ -61,6 +61,33 @@ describe('FormattingControls', () => {
     ).not.toBeInTheDocument();
   });
 
+  it('offers accent colour and portrait controls on the photo template only', () => {
+    const { unmount } = render(
+      <FormattingControls
+        settings={{ ...DEFAULT_TEMPLATE_SETTINGS, template: 'photo-sidebar' }}
+        onChange={vi.fn()}
+      />
+    );
+    expect(
+      screen.getByRole('radiogroup', { name: 'builder.formatting.accentColor' })
+    ).toBeInTheDocument();
+    expect(
+      screen.getByRole('radiogroup', { name: 'builder.formatting.photo.shape:' })
+    ).toBeInTheDocument();
+    expect(
+      screen.getByRole('radiogroup', { name: 'builder.formatting.photo.size:' })
+    ).toBeInTheDocument();
+    expect(
+      screen.getByRole('switch', { name: 'builder.formatting.photo.show' })
+    ).toBeInTheDocument();
+    unmount();
+
+    renderControls();
+    expect(
+      screen.queryByRole('radiogroup', { name: 'builder.formatting.photo.shape:' })
+    ).not.toBeInTheDocument();
+  });
+
   it('picks the Vivid single-column template from the tiles', () => {
     const onChange = renderControls();
     fireEvent.click(

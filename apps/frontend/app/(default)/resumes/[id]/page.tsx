@@ -34,6 +34,12 @@ import {
 import { EnrichmentModal } from '@/components/enrichment/enrichment-modal';
 import { AgentPromptDialog } from '@/components/agent/agent-prompt-dialog';
 import { useTranslations } from '@/lib/i18n';
+import {
+  documentAdditionalLabels,
+  documentFallbackLabels,
+  documentSectionHeadings,
+} from '@/lib/i18n/document-labels';
+import { makeTranslator } from '@/lib/i18n/translate';
 import { withLocalizedDefaultSections } from '@/lib/utils/section-helpers';
 import { isSameResumeData } from '@/lib/utils/resume-draft-storage';
 import { useAgentRefresh } from '@/hooks/use-agent-refresh';
@@ -50,7 +56,7 @@ export default function ResumeViewerPage() {
   useLayoutEffect(() => {
     translationsRef.current = t;
   }, [t]);
-  const { uiLanguage } = useLanguage();
+  const { contentLanguage } = useLanguage();
   const params = useParams();
   const router = useRouter();
   const {
@@ -107,10 +113,13 @@ export default function ResumeViewerPage() {
   const { begin: beginSetDefault, isCurrent: isCurrentSetDefault } = useOperationOwner(resumeId);
   const { begin: beginDuplicate, isCurrent: isCurrentDuplicate } = useOperationOwner(resumeId);
 
+  // Document strings follow the output language, not the UI language (read the app in
+  // English, write resumes in Chinese → Chinese headings).
+  const docT = useMemo(() => makeTranslator(contentLanguage), [contentLanguage]);
   const localizedResumeData = useMemo(() => {
     if (!resumeData) return null;
-    return withLocalizedDefaultSections(resumeData, t);
-  }, [resumeData, t]);
+    return withLocalizedDefaultSections(resumeData, docT);
+  }, [resumeData, docT]);
 
   useEffect(() => {
     if (!resumeId) return;
@@ -376,7 +385,7 @@ export default function ResumeViewerPage() {
     setIsDownloading(true);
     try {
       setDownloadError(null);
-      const blob = await downloadResumePdf(resumeId, templateSettings, uiLanguage);
+      const blob = await downloadResumePdf(resumeId, templateSettings, contentLanguage);
       const filename = sanitizeFilename(resumeTitle, resumeId, 'resume');
       downloadBlobAsFile(blob, filename);
       if (!isCurrentDownload(token)) return;
@@ -385,7 +394,7 @@ export default function ResumeViewerPage() {
       if (!isCurrentDownload(token)) return;
       console.error('Failed to download resume:', err);
       if (err instanceof TypeError && err.message.includes('Failed to fetch')) {
-        const fallbackUrl = getResumePdfUrl(resumeId, templateSettings, uiLanguage);
+        const fallbackUrl = getResumePdfUrl(resumeId, templateSettings, contentLanguage);
         const didOpen = openUrlInNewTab(fallbackUrl);
         if (!didOpen) {
           setDownloadError(t('common.popupBlocked', { url: fallbackUrl }));
@@ -642,25 +651,9 @@ export default function ResumeViewerPage() {
               resumeData={localizedResumeData || resumeData}
               template={templateSettings.template}
               settings={templateSettings}
-              additionalSectionLabels={{
-                technicalSkills: t('resume.additionalLabels.technicalSkills'),
-                languages: t('resume.additionalLabels.languages'),
-                certifications: t('resume.additionalLabels.certifications'),
-                awards: t('resume.additionalLabels.awards'),
-              }}
-              sectionHeadings={{
-                summary: t('resume.sections.summary'),
-                experience: t('resume.sections.experience'),
-                education: t('resume.sections.education'),
-                projects: t('resume.sections.projects'),
-                certifications: t('resume.sections.certifications'),
-                skills: t('resume.sections.skillsOnly'),
-                languages: t('resume.sections.languages'),
-                awards: t('resume.sections.awards'),
-                links: t('resume.sections.links'),
-                earlierExperience: t('resume.sections.earlierExperience'),
-              }}
-              fallbackLabels={{ name: t('resume.defaults.name') }}
+              additionalSectionLabels={documentAdditionalLabels(docT)}
+              sectionHeadings={documentSectionHeadings(docT)}
+              fallbackLabels={documentFallbackLabels(docT)}
             />
           </div>
         </div>

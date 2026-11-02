@@ -247,7 +247,7 @@ IMPROVE_RESUME_PROMPT_NUDGE = """Lightly nudge this resume toward the job descri
 
 {critical_truthfulness_rules}
 
-IMPORTANT: Generate ALL text content (summary, descriptions, skills) in {output_language}.
+IMPORTANT: Generate ALL text content (summary, descriptions, skills) in {output_language}. If a line, heading or skill from the original is in another language, translate it into {output_language}; an English job description is NOT a reason to answer in English.
 Do NOT include personalInfo in your output - it will be preserved from the original resume.
 
 Rules:
@@ -279,7 +279,7 @@ IMPROVE_RESUME_PROMPT_KEYWORDS = """Enhance this resume with relevant keywords f
 
 {critical_truthfulness_rules}
 
-IMPORTANT: Generate ALL text content (summary, descriptions, skills) in {output_language}.
+IMPORTANT: Generate ALL text content (summary, descriptions, skills) in {output_language}. If a line, heading or skill from the original is in another language, translate it into {output_language}; an English job description is NOT a reason to answer in English.
 Do NOT include personalInfo in your output - it will be preserved from the original resume.
 
 Rules:
@@ -309,7 +309,7 @@ IMPROVE_RESUME_PROMPT_FULL = """Tailor this resume for the job. Output ONLY the 
 
 {critical_truthfulness_rules}
 
-IMPORTANT: Generate ALL text content (summary, descriptions, skills) in {output_language}.
+IMPORTANT: Generate ALL text content (summary, descriptions, skills) in {output_language}. If a line, heading or skill from the original is in another language, translate it into {output_language}; an English job description is NOT a reason to answer in English.
 Do NOT include personalInfo in your output - it will be preserved from the original resume.
 
 Rules:
@@ -341,7 +341,7 @@ IMPROVE_RESUME_PROMPT_HEAVY = """Rewrite this resume for the job. Output ONLY th
 
 {critical_truthfulness_rules}
 
-IMPORTANT: Generate ALL text content (summary, descriptions, skills) in {output_language}.
+IMPORTANT: Generate ALL text content (summary, descriptions, skills) in {output_language}. If a line, heading or skill from the original is in another language, translate it into {output_language}; an English job description is NOT a reason to answer in English.
 Do NOT include personalInfo in your output - it will be preserved from the original resume.
 
 Rules:

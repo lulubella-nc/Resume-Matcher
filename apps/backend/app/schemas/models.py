@@ -2,10 +2,18 @@
 
 import copy
 import re
+from collections.abc import Mapping
 from enum import Enum
 from typing import Any, Literal
 
-from pydantic import BaseModel, Field, field_validator, model_validator
+from pydantic import (
+    BaseModel,
+    Field,
+    SerializerFunctionWrapHandler,
+    field_validator,
+    model_serializer,
+    model_validator,
+)
 
 from app.ai_limits import validate_source_size
 from app.config import normalize_provider
@@ -153,6 +161,24 @@ class PersonalInfo(BaseModel):
     website: str | None = None
     linkedin: str | None = None
     github: str | None = None
+    # Portrait for the photo templates: an uploaded data URL or an http(s) link.
+    # Stored with the resume so the preview and the PDF render the same image.
+    photo: str | None = None
+
+    @model_serializer(mode="wrap")
+    def _omit_empty_photo(
+        self, handler: SerializerFunctionWrapHandler
+    ) -> dict[str, Any]:
+        """Leave `photo` out when there is none.
+
+        The field was added after resumes were already stored, so serialising its
+        default would make every untouched resume gain a `"photo": null` the stored
+        copy does not have, and a save would then differ from what was read.
+        """
+        data = handler(self)
+        if data.get("photo") is None:
+            data.pop("photo", None)
+        return data
 
 
 class Experience(BaseModel):
@@ -250,6 +276,11 @@ class AdditionalInfo(BaseModel):
     languages: list[str] = Field(default_factory=list)
     certificationsTraining: list[str] = Field(default_factory=list)
     awards: list[str] = Field(default_factory=list)
+    # Skill name -> proficiency 1..5. Legacy: no template renders a rating scale any
+    # more (an unrated skill would show an invented score). Accepted and preserved so
+    # resumes saved while the Editorial template drew dots keep their data.
+    # Kept out of technicalSkills so the other templates still print bare names.
+    skillLevels: dict[str, int] = Field(default_factory=dict)
 
     @field_validator(
         "technicalSkills",
@@ -261,6 +292,39 @@ class AdditionalInfo(BaseModel):
     @classmethod
     def _normalize_string_fields(cls, value: Any) -> list[str]:
         return _coerce_string_list(value)
+
+    @field_validator("skillLevels", mode="before")
+    @classmethod
+    def _normalize_skill_levels(cls, value: Any) -> dict[str, int]:
+        """Keep only named skills with a numeric level, clamped to 1..5."""
+        if not isinstance(value, Mapping):
+            return {}
+        levels: dict[str, int] = {}
+        for raw_name, raw_level in value.items():
+            name = str(raw_name).strip()
+            if not name or raw_level is None or raw_level == "":
+                continue
+            try:
+                level = int(round(float(raw_level)))
+            except (TypeError, ValueError):
+                continue
+            levels[name] = min(5, max(1, level))
+        return levels
+
+    @model_serializer(mode="wrap")
+    def _omit_empty_skill_levels(
+        self, handler: SerializerFunctionWrapHandler
+    ) -> dict[str, Any]:
+        """Drop the legacy map when it is empty.
+
+        `skillLevels` exists only so an older resume keeps the ratings it once had.
+        Serialising the default would add `"skillLevels": {}` to every payload, which
+        then no longer matches the data that was stored for the same resume.
+        """
+        data = handler(self)
+        if not data.get("skillLevels"):
+            data.pop("skillLevels", None)
+        return data
 
 
 # Section Metadata Models for dynamic section management
@@ -577,6 +641,23 @@ ResumeTemplate = Literal[
     "vivid-single",
     "modern-deedy",
     "deedy",
+    "photo-sidebar",
+    "editorial",
+    "rail-notes",
+    "label-chips",
+    "classic-rules",
+    "numbered",
+    "night-rail",
+    "band-rail",
+    "timeline",
+    "rule-rail",
+    "serif-rail",
+    "blue-rail",
+    "night-band",
+    "framed",
+    "panels",
+    "photo-panel",
+    "ats-classic",
 ]
 
 
@@ -619,7 +700,25 @@ class TemplateSettings(BaseModel):
     fontSize: TemplateFontSize = Field(default_factory=TemplateFontSize)
     compactMode: bool = False
     showContactIcons: bool = False
-    accentColor: Literal["blue", "green", "orange", "red"] = "blue"
+    accentColor: Literal[
+        "blue",
+        "green",
+        "orange",
+        "red",
+        "purple",
+        "teal",
+        "gold",
+        "navy",
+        "denim",
+        "sage",
+        "ash",
+        "graphite",
+        "sand",
+    ] = "blue"
+    # Photo controls, read by the photo templates only.
+    showPhoto: bool = True
+    photoShape: Literal["circle", "square"] = "circle"
+    photoSize: int = Field(2, ge=1, le=3)
     # Orders saves from one builder session (a tab): `revision` counts up per session.
     # A save older than the stored one from the same session is ignored, so that
     # tab's requests arriving out of order cannot undo its newer choice. Saves from
@@ -653,7 +752,24 @@ class PageFitSettings(BaseModel):
     bodyFont: Literal["serif", "sans-serif", "mono"] = "sans-serif"
     compactMode: bool = False
     showContactIcons: bool = False
-    accentColor: Literal["blue", "green", "orange", "red"] = "blue"
+    accentColor: Literal[
+        "blue",
+        "green",
+        "orange",
+        "red",
+        "purple",
+        "teal",
+        "gold",
+        "navy",
+        "denim",
+        "sage",
+        "ash",
+        "graphite",
+        "sand",
+    ] = "blue"
+    showPhoto: bool = True
+    photoShape: Literal["circle", "square"] = "circle"
+    photoSize: int = Field(2, ge=1, le=3)
     lang: str | None = Field(None, pattern=r"^[a-z]{2}(-[A-Z]{2})?$")
     # Academic CV mode: no page cap. Page fit and verification report the page count
     # but never trim to a limit or raise an over-limit warning. Not a print setting,

@@ -444,10 +444,10 @@ def _merge_entries(
     return result
 
 
-def _merge_additional(source: Any, candidate: Any) -> dict[str, list[str]]:
+def _merge_additional(source: Any, candidate: Any) -> dict[str, Any]:
     source_dict = source if isinstance(source, dict) else {}
     candidate_dict = candidate if isinstance(candidate, dict) else {}
-    result: dict[str, list[str]] = {}
+    result: dict[str, Any] = {}
     for field in ("technicalSkills", "languages", "certificationsTraining", "awards"):
         source_items = [
             item for item in source_dict.get(field, []) if isinstance(item, str)
@@ -474,6 +474,21 @@ def _merge_additional(source: Any, candidate: Any) -> dict[str, list[str]]:
                 remaining_candidate_items[key] -= 1
             else:
                 result[field].append(item)
+
+    # Legacy proficiency ratings are user input, not model output: carry both sides over,
+    # candidate first, so a rewrite never silently flattens a rated skill row.
+    levels: dict[str, Any] = {}
+    for side in (source_dict.get("skillLevels"), candidate_dict.get("skillLevels")):
+        if isinstance(side, dict):
+            for name, level in side.items():
+                if (
+                    isinstance(name, str)
+                    and name.strip()
+                    and isinstance(level, (int, float))
+                ):
+                    levels.setdefault(name.strip(), int(level))
+    if levels:
+        result["skillLevels"] = levels
     return result
 
 

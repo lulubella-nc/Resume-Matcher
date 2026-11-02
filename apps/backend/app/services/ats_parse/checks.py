@@ -11,7 +11,24 @@ from app.services.ats_parse.normalize import normalize
 from app.services.parser import _MD_DATE_RE
 
 TWO_COLUMN_TEMPLATES = frozenset(
-    {"swiss-two-column", "modern-two-column", "vivid", "deedy"}
+    {
+        "swiss-two-column",
+        "modern-two-column",
+        "vivid",
+        "deedy",
+        "photo-sidebar",
+        "editorial",
+        "rail-notes",
+        "night-rail",
+        "band-rail",
+        "timeline",
+        "rule-rail",
+        "serif-rail",
+        "blue-rail",
+        "framed",
+        "panels",
+        "photo-panel",
+    }
 )
 MIN_TEXT_CHARACTERS = 50
 SPARSE_PAGE_CHARACTERS = 200

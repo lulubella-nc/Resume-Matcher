@@ -481,13 +481,90 @@
         "deedy": {
           "name": "Deedy",
           "description": "Layout de duas colunas com nome em traço fino, coluna esquerda estreita e títulos em cinza-claro"
+        },
+        "photoSidebar": {
+          "name": "Barra lateral com foto",
+          "description": "Coluna colorida com foto, contato e competências ao lado da sua trajetória"
+        },
+        "editorial": {
+          "name": "Editorial",
+          "description": "Layout arejado em duas colunas com títulos serifados dourados, retrato redondo e uma lista de competências sem notas"
+        },
+        "railNotes": {
+          "name": "Notas Laterais",
+          "description": "Coluna direita com contato rotulado, títulos com ícone e competências com linha"
+        },
+        "labelChips": {
+          "name": "Etiquetas",
+          "description": "Faixa de cor atrás do nome, etiquetas pretas e competências com linha"
+        },
+        "classicRules": {
+          "name": "Linhas Clássicas",
+          "description": "Cabeçalho centralizado, rótulos espaçados sobre linhas e datas em coluna própria"
+        },
+        "numbered": {
+          "name": "Numerado",
+          "description": "Seções numeradas com linhas grossas e contato em grade rótulo/valor"
+        },
+        "nightRail": {
+          "name": "Coluna Noturna",
+          "description": "Coluna azul-marinho de altura total com competências de linha branca"
+        },
+        "bandRail": {
+          "name": "Coluna Faixa",
+          "description": "Faixa de cor no topo e coluna estreita com competências e idiomas"
+        },
+        "timeline": {
+          "name": "Linha do tempo",
+          "description": "Retrato centralizado sobre o nome, títulos com ícone em maiúsculas e uma linha do tempo com um nó por cargo"
+        },
+        "ruleRail": {
+          "name": "Coluna com fio",
+          "description": "Nome grande sobre o cargo, coluna esquerda fechada por um fio vertical e habilidades sublinhadas"
+        },
+        "serifRail": {
+          "name": "Coluna serifada",
+          "description": "Nome em serifa na cor de destaque ao lado de um retrato quadrado, maiúsculas espaçadas e habilidades com fio"
+        },
+        "blueRail": {
+          "name": "Coluna azul",
+          "description": "Retrato ao lado do nome, títulos com ícone em caixa mista e um fio fino sob cada habilidade"
+        },
+        "nightBand": {
+          "name": "Faixa escura",
+          "description": "Faixa escura com retrato centralizado, nome em serifa e tarja de contato; depois uma coluna única"
+        },
+        "framed": {
+          "name": "Emoldurado",
+          "description": "Nome e cargo dentro de uma moldura, títulos em maiúsculas com fio e coluna à esquerda"
+        },
+        "panels": {
+          "name": "Painéis",
+          "description": "Nome grande ao lado do retrato, títulos ampliados e painéis cinza na coluna da direita"
+        },
+        "photoPanel": {
+          "name": "Foto lateral",
+          "description": "Retrato alto no topo de uma coluna cinza, com o nome em itálico ao lado"
+        },
+        "atsClassic": {
+          "name": "ATS clássico",
+          "description": "Coluna única densa: nome centralizado, títulos em maiúsculas com fio, cargo e datas na mesma linha"
         }
       },
       "accentColors": {
         "blue": "Azul",
         "green": "Verde",
         "orange": "Laranja",
-        "red": "Vermelho"
+        "red": "Vermelho",
+        "purple": "Roxo",
+        "teal": "Verde-azulado",
+        "gold": "Dourado",
+        "navy": "Azul-marinho",
+        "denim": "Denim",
+        "sage": "Sálvia",
+        "ash": "Cinza claro",
+        "graphite": "Grafite",
+        "sand": "Areia"
       },
       "fontNames": {
         "serif": "Serifada",
@@ -527,7 +604,22 @@
       "effectiveHeaderFont": "Fonte do Cabeçalho",
       "effectiveBodyFont": "Fonte do Corpo",
       "compactHint": "O modo compacto reduz espaçamento e altura da linha. Margens e tamanho de fonte base permanecem literais.",
-      "resetDefaults": "Restaurar Padrões"
+      "resetDefaults": "Restaurar Padrões",
+      "photo": {
+        "title": "Foto",
+        "show": "Mostrar foto",
+        "shape": "Forma",
+        "shapes": {
+          "circle": "Redonda",
+          "square": "Quadrada"
+        },
+        "size": "Tamanho",
+        "sizes": {
+          "1": "P",
+          "2": "M",
+          "3": "G"
+        }
+      }
     },
     "personalInfoForm": {
       "placeholders": {
@@ -539,6 +631,22 @@
         "website": "portfolio.com",
         "linkedin": "linkedin.com/in/joao",
         "github": "github.com/joao"
+      },
+      "photo": {
+        "label": "Foto",
+        "empty": "Sem foto",
+        "upload": "Enviar foto",
+        "replace": "Trocar",
+        "remove": "Remover",
+        "uploaded": "Foto enviada (salva no currículo)",
+        "urlPlaceholder": "ou cole um link de imagem: https://…",
+        "hint": "JPG ou PNG até 12 MB; reduzida para 512 px e salva no currículo.",
+        "errors": {
+          "type": "Esse arquivo não é uma imagem.",
+          "size": "A imagem tem mais de 12 MB.",
+          "decode": "Não foi possível ler a imagem. Tente JPG ou PNG.",
+          "unsupported": "Este navegador não conseguiu processar a imagem."
+        }
       }
     },
     "leftPanel": {
@@ -1268,6 +1376,15 @@
       "languages": "Idiomas:",
       "certifications": "Certificações:",
       "awards": "Prêmios:"
+    },
+    "contact": {
+      "details": "Detalhes",
+      "address": "Endereço",
+      "phone": "Telefone",
+      "email": "E-mail",
+      "website": "Site",
+      "linkedin": "LinkedIn",
+      "github": "GitHub"
     }
   },
   "coverLetter": {

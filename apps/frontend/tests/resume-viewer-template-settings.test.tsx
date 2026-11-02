@@ -15,8 +15,10 @@ vi.mock('@/lib/i18n', () => ({ useTranslations: () => ({ t: (key: string) => key
 vi.mock('@/lib/context/status-cache', () => ({
   useStatusCache: () => ({ decrementResumes: vi.fn(), setHasMasterResume: vi.fn() }),
 }));
+// The UI and output languages differ on purpose: the PDF must carry the content
+// language, not the language of the app chrome.
 vi.mock('@/lib/context/language-context', () => ({
-  useLanguage: () => ({ uiLanguage: 'es' }),
+  useLanguage: () => ({ uiLanguage: 'es', contentLanguage: 'zh' }),
 }));
 vi.mock('@/components/enrichment/enrichment-modal', () => ({ EnrichmentModal: () => null }));
 // The print-only copy (browser printing).
@@ -79,7 +81,7 @@ describe('resume viewer template settings', () => {
     expect(printProps.last).toMatchObject({ template: 'vivid-single', settings: saved });
 
     await act(async () => download.click());
-    expect(downloadResumePdf).toHaveBeenCalledWith('resume-123', saved, 'es');
+    expect(downloadResumePdf).toHaveBeenCalledWith('resume-123', saved, 'zh');
   });
 
   it('shows and downloads a never-formatted resume in the default template', async () => {
@@ -93,7 +95,7 @@ describe('resume viewer template settings', () => {
     expect(previewProps.last?.settings).toEqual(DEFAULT_TEMPLATE_SETTINGS);
 
     await act(async () => download.click());
-    expect(downloadResumePdf).toHaveBeenCalledWith('resume-123', DEFAULT_TEMPLATE_SETTINGS, 'es');
+    expect(downloadResumePdf).toHaveBeenCalledWith('resume-123', DEFAULT_TEMPLATE_SETTINGS, 'zh');
   });
 
   it('opens the fallback PDF link with the same settings', async () => {
@@ -103,6 +105,6 @@ describe('resume viewer template settings', () => {
 
     const download = await screen.findByRole('button', { name: 'resumeViewer.downloadResume' });
     await act(async () => download.click());
-    expect(getResumePdfUrl).toHaveBeenCalledWith('resume-123', saved, 'es');
+    expect(getResumePdfUrl).toHaveBeenCalledWith('resume-123', saved, 'zh');
   });
 });

@@ -1,13 +1,8 @@
-import type { Locale } from '@/i18n/config';
-import { getMessages as getMessagesForLocale } from './messages';
-import { applyParams, getNestedValue } from './utils';
-
-export function translate(
-  locale: Locale,
-  key: string,
-  params?: Record<string, string | number>
-): string {
-  const messages = getMessagesForLocale(locale);
-  const translation = getNestedValue(messages as unknown as Record<string, unknown>, key);
-  return applyParams(translation, params);
-}
+/**
+ * Server-side translation helper.
+ *
+ * The implementation lives in `./translate` so client components can bind the same
+ * function to the content language; this module keeps the import path that the print
+ * route and other server code already use.
+ */
+export { translate } from './translate';
