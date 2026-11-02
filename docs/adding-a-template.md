@@ -37,11 +37,15 @@ Two rules that follow from this:
   ```python
   from collections import Counter
   from PIL import Image
-  im = Image.open("paralegal-resume-examples.jpg").convert("RGB")
+  im = Image.open("reference.jpg").convert("RGB")  # your own screenshot
   print(Counter(im.crop((230, 150, 340, 200)).getdata()).most_common(12))
   ```
 
   Editorial's `gold` accent (`#A98C60`) came from that sample.
+
+  The design screenshots this repo was built against are **not committed** (they are
+  third-party examples, kept out of git along with the rest of the local reference
+  library). Point the snippet at whatever image you are translating.
 
 ## 2. Map every region onto `ResumeData`
 
@@ -77,9 +81,9 @@ Notes:
 
 ## 2b. Or add a preset instead of a component
 
-Since the reference library (`*-resume-examples.jpg`) turned out to hold far fewer
-designs than images — the same layout recurs across job titles with a different
-accent — there is a second, cheaper path: the shared engine
+Since the reference library (`*-resume-examples.jpg`, kept out of git) turned out to
+hold far fewer designs than images — the same layout recurs across job titles with a
+different accent — there is a second, cheaper path: the shared engine
 `components/resume/resume-profile.tsx` draws every one of those designs from a preset
 in `components/resume/profile-presets.ts`.
 
